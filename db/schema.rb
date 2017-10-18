@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20171018123300) do
     t.integer "amount"
     t.string "unit"
     t.string "expiry_date"
-    t.boolean "odered"
+    t.boolean "ordered"
     t.string "delivery_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -65,6 +65,13 @@ ActiveRecord::Schema.define(version: 20171018123300) do
     t.index ["address_id"], name: "index_tafels_on_address_id"
   end
 
+  create_table "tafels_transporters", id: false, force: :cascade do |t|
+    t.bigint "transporter_id"
+    t.bigint "tafel_id"
+    t.index ["tafel_id"], name: "index_tafels_transporters_on_tafel_id"
+    t.index ["transporter_id"], name: "index_tafels_transporters_on_transporter_id"
+  end
+
   create_table "transporters", force: :cascade do |t|
     t.bigint "address_id"
     t.string "name"
@@ -72,13 +79,6 @@ ActiveRecord::Schema.define(version: 20171018123300) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["address_id"], name: "index_transporters_on_address_id"
-  end
-
-  create_table "transporters_tafels", id: false, force: :cascade do |t|
-    t.bigint "transporter_id"
-    t.bigint "tafel_id"
-    t.index ["tafel_id"], name: "index_transporters_tafels_on_tafel_id"
-    t.index ["transporter_id"], name: "index_transporters_tafels_on_transporter_id"
   end
 
   create_table "users", force: :cascade do |t|
