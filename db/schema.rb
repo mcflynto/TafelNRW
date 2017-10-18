@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171018114857) do
+ActiveRecord::Schema.define(version: 20171018123300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "adresses", force: :cascade do |t|
+  create_table "addresses", force: :cascade do |t|
     t.string "street"
+    t.string "house_number"
     t.string "city"
     t.string "phone"
     t.string "plz"
@@ -24,7 +25,7 @@ ActiveRecord::Schema.define(version: 20171018114857) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "doations", force: :cascade do |t|
+  create_table "donations", force: :cascade do |t|
     t.bigint "donator_id"
     t.bigint "transporter_id"
     t.string "food"
@@ -35,36 +36,42 @@ ActiveRecord::Schema.define(version: 20171018114857) do
     t.string "delivery_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["donator_id"], name: "index_doations_on_donator_id"
-    t.index ["transporter_id"], name: "index_doations_on_transporter_id"
+    t.index ["donator_id"], name: "index_donations_on_donator_id"
+    t.index ["transporter_id"], name: "index_donations_on_transporter_id"
   end
 
   create_table "donations_tafels", id: false, force: :cascade do |t|
-    t.bigint "donations_id"
+    t.bigint "donation_id"
     t.bigint "tafel_id"
-    t.index ["donations_id"], name: "index_donations_tafels_on_donations_id"
+    t.index ["donation_id"], name: "index_donations_tafels_on_donation_id"
     t.index ["tafel_id"], name: "index_donations_tafels_on_tafel_id"
   end
 
   create_table "donators", force: :cascade do |t|
+    t.bigint "address_id"
     t.string "name"
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["address_id"], name: "index_donators_on_address_id"
   end
 
   create_table "tafels", force: :cascade do |t|
+    t.bigint "address_id"
     t.string "name"
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["address_id"], name: "index_tafels_on_address_id"
   end
 
   create_table "transporters", force: :cascade do |t|
+    t.bigint "address_id"
     t.string "name"
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["address_id"], name: "index_transporters_on_address_id"
   end
 
   create_table "transpoters_tafels", id: false, force: :cascade do |t|
