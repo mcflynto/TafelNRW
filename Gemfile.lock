@@ -80,6 +80,7 @@ GEM
     ffi (1.9.18)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
+    grease (0.3.1)
     haml (5.0.4)
       temple (>= 0.8.0)
       tilt
@@ -96,8 +97,9 @@ GEM
     jwt (1.5.6)
     less (2.6.0)
       commonjs (~> 0.2.7)
-    less-rails (2.8.0)
+    less-rails (3.0.0)
       actionpack (>= 4.0)
+      grease
       less (~> 2.6.0)
       sprockets (> 2, < 4)
       tilt
@@ -229,11 +231,11 @@ GEM
     turbolinks (5.0.1)
       turbolinks-source (~> 5)
     turbolinks-source (5.0.3)
-    twitter-bootstrap-rails (4.0.0)
-      actionpack (~> 5.0, >= 5.0.1)
-      execjs (~> 2.7)
-      less-rails (~> 2.8, >= 2.8.0)
-      railties (~> 5.0, >= 5.0.1)
+    twitter-bootstrap-rails (3.2.2)
+      actionpack (>= 3.1)
+      execjs (>= 2.2.2, >= 2.2)
+      less-rails (>= 2.5.0)
+      railties (>= 3.1)
     tzinfo (1.2.3)
       thread_safe (~> 0.1)
     uglifier (3.2.0)
@@ -262,7 +264,7 @@ DEPENDENCIES
   haml
   jbuilder (~> 2.5)
   jquery-rails
-  less-rails
+  less-rails (~> 3.0.0)
   listen (>= 3.0.5, < 3.2)
   pg (~> 0.18)
   puma (~> 3.7)

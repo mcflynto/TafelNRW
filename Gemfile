@@ -17,7 +17,7 @@ gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
 # Use bootstrap for responsive views
 gem 'bootstrap_form'
-gem 'less-rails'
+gem 'less-rails', '~> 3.0.0'
 gem 'therubyracer'
 gem 'twitter-bootstrap-rails'
 # Use JQuery for Rails
