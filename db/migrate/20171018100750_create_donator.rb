@@ -1,6 +1,6 @@
-class Donator < ActiveRecord::Migration[5.1]
+class CreateDonator < ActiveRecord::Migration[5.1]
   def change
-    create_table :donator do |t|
+    create_table :donators do |t|
       t.string :name
       t.string :email
 

@@ -1,6 +1,6 @@
-class Donation < ActiveRecord::Migration[5.1]
+class CreateDonation < ActiveRecord::Migration[5.1]
   def change
-    create_table :doation do |t|
+    create_table :doations do |t|
       t.references :donator
       t.references :transporter
       t.string :food

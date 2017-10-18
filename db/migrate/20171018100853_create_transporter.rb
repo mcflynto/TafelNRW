@@ -1,6 +1,6 @@
-class Transporter < ActiveRecord::Migration[5.1]
+class CreateTransporter < ActiveRecord::Migration[5.1]
   def change
-    create_table :transporter do |t|
+    create_table :transporters do |t|
       t.string :name
       t.string :email
 

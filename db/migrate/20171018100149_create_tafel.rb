@@ -1,6 +1,6 @@
-class Tafel < ActiveRecord::Migration[5.1]
+class CreateTafel < ActiveRecord::Migration[5.1]
   def change
-    create_table :tafel do |t|
+    create_table :tafels do |t|
       t.string :name
       t.string :email
 
