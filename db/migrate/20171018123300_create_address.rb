@@ -6,6 +6,7 @@ class CreateAddress < ActiveRecord::Migration[5.1]
       t.string :city
       t.string :phone
       t.string :plz
+      t.references :addressable, polymorphic: true, index: true
 
       t.timestamps
     end

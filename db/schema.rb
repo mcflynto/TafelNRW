@@ -21,8 +21,11 @@ ActiveRecord::Schema.define(version: 20171018123300) do
     t.string "city"
     t.string "phone"
     t.string "plz"
+    t.string "addressable_type"
+    t.bigint "addressable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
   end
 
   create_table "donations", force: :cascade do |t|
@@ -32,7 +35,7 @@ ActiveRecord::Schema.define(version: 20171018123300) do
     t.integer "amount"
     t.string "unit"
     t.string "expiry_date"
-    t.boolean "odered"
+    t.boolean "ordered"
     t.string "delivery_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -48,30 +51,24 @@ ActiveRecord::Schema.define(version: 20171018123300) do
   end
 
   create_table "donators", force: :cascade do |t|
-    t.bigint "address_id"
     t.string "name"
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["address_id"], name: "index_donators_on_address_id"
   end
 
   create_table "tafels", force: :cascade do |t|
-    t.bigint "address_id"
     t.string "name"
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["address_id"], name: "index_tafels_on_address_id"
   end
 
   create_table "transporters", force: :cascade do |t|
-    t.bigint "address_id"
     t.string "name"
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["address_id"], name: "index_transporters_on_address_id"
   end
 
   create_table "transporters_tafels", id: false, force: :cascade do |t|

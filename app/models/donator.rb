@@ -1,4 +1,4 @@
 class Donator < ApplicationRecord
-  belongs_to :address
+  has_one :address, as: :addressable
   has_many :donations
 end

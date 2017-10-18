@@ -1,5 +1,3 @@
 class Address < ApplicationRecord
-  has_one :tafel
-  has_one :donator
-  has_one :transporter
+  belongs_to :addressable, polymorphic: true
 end
