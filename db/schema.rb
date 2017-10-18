@@ -74,11 +74,11 @@ ActiveRecord::Schema.define(version: 20171018123300) do
     t.index ["address_id"], name: "index_transporters_on_address_id"
   end
 
-  create_table "transpoters_tafels", id: false, force: :cascade do |t|
+  create_table "transporters_tafels", id: false, force: :cascade do |t|
     t.bigint "transporter_id"
     t.bigint "tafel_id"
-    t.index ["tafel_id"], name: "index_transpoters_tafels_on_tafel_id"
-    t.index ["transporter_id"], name: "index_transpoters_tafels_on_transporter_id"
+    t.index ["tafel_id"], name: "index_transporters_tafels_on_tafel_id"
+    t.index ["transporter_id"], name: "index_transporters_tafels_on_transporter_id"
   end
 
   create_table "users", force: :cascade do |t|
