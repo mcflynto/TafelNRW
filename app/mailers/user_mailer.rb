@@ -16,4 +16,14 @@ class UserMailer < ApplicationMailer
     @tafel = Tafel.find(user.tafel_id)
     mail(to: user.email , subject: "Account Tafel")
   end
+
+  def activation_needed_email(user)
+    @user = user
+    @tafel = Tafel.find(user.tafel_id)
+    @url = "http://0.0.0.0:3000/users/#{user.activation_token}/activate"
+    mail(to: user.email , subject: "Account Tafel")
+  end
+
+  def activation_success_email(user)
+  end
 end

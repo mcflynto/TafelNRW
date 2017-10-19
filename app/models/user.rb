@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
   #scope :user_tafel, -> (tafelid) { where('tafel_id', tafelid) }
-
+  before_create :setup_activation
 
   validates :email, uniqueness: true
   def is_admin?

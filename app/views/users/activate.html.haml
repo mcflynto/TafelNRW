@@ -1,0 +1,12 @@
+%h1 Passwort erstellen
+= form_for @user,  url: confirm_user_url(@user), :method => :PATCH do |f|
+  = f.label :name
+  = f.text_field :name
+  = f.label :email
+  = f.email_field :email
+  = f.label :password
+  = f.password_field :password
+  = f.label :password_confirmation
+  = f.password_field :password_confirmation
+  = f.text_field :activation_token, input_html: { value: @token }, as: :hidden
+  = f.submit 'Erstellen'
