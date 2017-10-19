@@ -8,5 +8,5 @@
   = f.password_field :password
   = f.label :password_confirmation
   = f.password_field :password_confirmation
-  = f.text_field :activation_token, input_html: { value: @token }, as: :hidden
+  = f.hidden_field :activation_token, input_html: { value: @token }
   = f.submit 'Erstellen'
