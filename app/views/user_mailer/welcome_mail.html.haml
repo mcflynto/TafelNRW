@@ -1,0 +1,18 @@
+Es wurde für sie ein Account bei der Tafel
+= @tafel.name
+angelegt
+
+Ihr Daten sind folgende:
+%br/
+Accountname:
+= @user.name
+EMail:
+= @user.email
+
+- if @user.is_admin?
+  Du wurdest als Admin angelegt
+- else
+  Du wurdest als normaler Mitarbeiter erstellt
+
+Um deinen Account freizuschalten musst du ein Passwort festlegen
+= link_to "Passwort erstellen", "localhost:3000/users/" + @user.id + "/create_password"

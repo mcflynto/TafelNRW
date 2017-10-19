@@ -1,0 +1,11 @@
+%h1 Alle Mitarbeiter deiner Tafel
+
+- current_user.users_tafel.each do |u|
+  %h3 Name:
+  = u.name
+  %h3 Email:
+  = u.email
+
+- if current_user.is_admin?
+  = link_to "Alle Nutzer Anzeigen", users_alluser_path
+  = link_to "Neuen Mitarbeiter erstellen", new_user_path

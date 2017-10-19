@@ -1,0 +1,8 @@
+%h1 Alle Mitarbeiter aller Tafeln
+
+- @user.each do |u|
+  %h3 Name:
+  = u.name
+  %h3 Email:
+  = u.email
+
