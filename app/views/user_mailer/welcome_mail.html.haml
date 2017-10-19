@@ -15,4 +15,4 @@ EMail:
   Du wurdest als normaler Mitarbeiter erstellt
 
 Um deinen Account freizuschalten musst du ein Passwort festlegen
-= link_to "Passwort erstellen", "localhost:3000/users/" + @user.id + "/create_password"
+= link_to "Passwort erstellen", "localhost:3000/users/" + @user.id.to_s + "/create_password"
