@@ -1,0 +1,11 @@
+.donator-header
+  %h1 Spender
+.donator-form
+  = bootstrap_form_for @donator do |f|
+    %ul
+      %li
+        = f.text_field :name
+      %li
+        = f.text_field :email
+      %li
+        = f.submit "Spende einstellen", class: "btn btn-success"
