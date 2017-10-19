@@ -3,14 +3,6 @@ class UsersController < ApplicationController
     @user = User.all
   end
 
-  def alluser
-    @user = User.order(:name).all
-  end
-
-  def show
-    @user = User.find(params[:id])
-  end
-
   def new
     @user = User.new
   end
@@ -50,13 +42,34 @@ class UsersController < ApplicationController
   end
 
   def destroy
+
     @user = User.find(params[:id])
-    if @user.destroy
-      flash[:notice] = "Nutzer wurde gelöscht"
+    if @user.delete
+      debugger
+      redirect_to root_path
 
     else
-      flash[:notice] = "Nutzer konnte nicht gelöscht werden"
+      render :edit
+
     end
+
+    # if @user == current_user
+    #   if @user.delete
+    #     redirect_to root_path
+    #   else
+    #     render :edit
+    #   end
+    # else
+    #   if @user.delete
+    #     redirect_to users_path
+    #   else
+    #     render :edit
+    #   end
+    # end
+    # debugger
+    # puts('foo')
+
+
   end
 
   def edit
@@ -64,12 +77,14 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(user_params)
+    @user = User.find(params[:id])
 
     if @user.update(user_params)
       flash[:notice] = "Nutzer wurde verändert"
+      redirect_to users_path
     else
       flash[:notice] = "Nutzer wurde nicht verändert"
+      render :edit
     end
   end
 

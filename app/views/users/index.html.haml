@@ -1,11 +1,17 @@
+= render '/sessions/logout'
 %h1 Alle Mitarbeiter deiner Tafel
+= link_to "Neuen Mitarbeiter erstellen", new_user_path
+- @user.each do |u|
+  - if current_user.is_admin?
+    %h3 Name:
+    = u.name
+    %h3 Email:
+    = u.email
+    %br/
+    = link_to "Mitarbieter bearbeiten", edit_user_path(u)
 
-- current_user.users_tafel.each do |u|
-  %h3 Name:
-  = u.name
-  %h3 Email:
-  = u.email
-
-- if current_user.is_admin?
-  = link_to "Alle Nutzer Anzeigen", users_alluser_path
-  = link_to "Neuen Mitarbeiter erstellen", new_user_path
+  - else
+    %h3 Name:
+    = u.name
+    %h3 Email:
+    = u.email

@@ -1,0 +1,28 @@
+= render '/sessions/logout'
+%h1 Mitarbeiter bearbeiten
+
+-#- if current_user.is_admin?
+  = form_for @user do |f|
+    = f.label :name
+    = f.text_field :name
+    = f.label :email
+    = f.email_field :email
+    = f.label :admin
+    = f.check_box :admin
+    = f.collection_radio_buttons(:tafel_id, Tafel.all, :id, :name)
+    = f.submit 'Bearbeiten'
+-#- else
+  = form_for @user do |f|
+    = f.label :name
+    = f.text_field :name
+    = f.label :email
+    = f.email_field :email
+    = f.label :password
+    = f.password_field :password
+    = f.label :password_confirmation
+    = f.password_field :password_confirmation
+    = f.submit 'Bearbeiten'
+
+%br/
+
+= link_to 'Löschen', user_path(@user), method: 'DELETE', class: 'btn btn-primary'

@@ -11,7 +11,7 @@
 -#   = f.collection_radio_buttons(:tafel_id, Tafel.all, :id, me)
 -#   = f.submit 'login'
 
-
+= render '/sessions/logout'
 %h1 Neuen Mitarbeiter erstellen
 = form_for @user do |f|
   = f.label :name
