@@ -6,20 +6,20 @@ class DonatorsController < ApplicationController
 
   def create
     @donator = Donator.new(donator_params)
-
     if @donator.save
       flash[:success] = 'Spende eingestellt!'
       redirect_to donations_path
 
     else
       flash[:error] = 'Es ist ein Fehler aufgetreteten'
-      render new
+      render :new
     end
   end
 
   private
 
   def donator_params
-    params.require(:donator).permit(:name, :email)
+    params.require(:donator).permit(:name, :email, address_attributes:
+                                    %i[street house_number city plz phone])
   end
 end
