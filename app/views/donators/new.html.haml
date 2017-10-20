@@ -7,5 +7,15 @@
         = f.text_field :name
       %li
         = f.text_field :email
+      = f.fields_for :address_attributes do |a|
+        #{a.text_field :street}
+        #{a.text_field :house_number}
+        #{a.text_field :city}
+        #{a.text_field :plz}
+        #{a.text_field :phone}
+      = f.fields_for 'donations_attributes[]', @donation do |d|
+        #{d.text_field :food}
+        #{d.number_field :amount}
+        #{d.text_field :unit}
       %li
         = f.submit "Spende einstellen", class: "btn btn-success"

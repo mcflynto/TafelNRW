@@ -1,5 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
+// Global styling
 h1 {
   font-family: Roboto, monospace;
+}
+
+// Donator page
+.donator-form {
+  max-width: 400px;
+  li {
+    list-style: none;
+  }
 }
