@@ -1,0 +1,9 @@
+%h1 Übersicht Donations
+%p Hello #{@donator.name}
+%p Donations:
+%ul
+- @donations.each do |d|
+  %p Donation #{d.id}
+  %li= d.food
+  %li= d.amount
+  %li= d.unit

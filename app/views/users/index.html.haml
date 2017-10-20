@@ -1,9 +1,10 @@
 = render '/sessions/logout'
+= link_to 'Spendenübersicht', donators_path
 %h1 Alle Mitarbeiter deiner Tafel
 - if current_user.is_admin?
   = link_to "Neuen Mitarbeiter erstellen", new_user_path
   = link_to "Neues Transportunternehmen hinzufügen", new_transporter_path
-  = link_to "Neues Tafel erstellen", new_tafel_path
+  = link_to "Neue Tafel erstellen", new_tafel_path
   = link_to "Alle Tafeln anzeigen", tafels_path
   = link_to "Alle Transportunternehmen", transporters_path
 - @user.each do |u|

@@ -1,5 +1,9 @@
 # Donators Controller
 class DonatorsController < ApplicationController
+  def index
+    @donator = Donator.all
+  end
+
   def new
     @donator = Donator.new
     @donation = Donation.new

@@ -1,0 +1,11 @@
+= render '/sessions/logout'
+= link_to 'Userliste', users_path
+%h1 Spendenübersicht
+%ul
+- @donator.each do |donator|
+  %li #{donator.name}
+  %ul
+  - donator.donations.each do |donations|
+    %li #{donations.food}
+    %li #{donations.amount}
+    %li #{donations.unit}
