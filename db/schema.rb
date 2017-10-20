@@ -64,13 +64,6 @@ ActiveRecord::Schema.define(version: 20171019102346) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "tafels_transporters", id: false, force: :cascade do |t|
-    t.bigint "transporter_id"
-    t.bigint "tafel_id"
-    t.index ["tafel_id"], name: "index_tafels_transporters_on_tafel_id"
-    t.index ["transporter_id"], name: "index_tafels_transporters_on_transporter_id"
-  end
-
   create_table "transporters", force: :cascade do |t|
     t.string "name"
     t.string "email"

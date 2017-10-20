@@ -1,6 +1,11 @@
 = render '/sessions/logout'
 %h1 Alle Mitarbeiter deiner Tafel
-= link_to "Neuen Mitarbeiter erstellen", new_user_path
+- if current_user.is_admin?
+  = link_to "Neuen Mitarbeiter erstellen", new_user_path
+  = link_to "Neues Transportunternehmen hinzufügen", new_transporter_path
+  = link_to "Neues Tafel erstellen", new_tafel_path
+  = link_to "Alle Tafeln anzeigen", tafels_path
+  = link_to "Alle Transportunternehmen", transporters_path
 - @user.each do |u|
   - if current_user.is_admin?
     %h3 Name:

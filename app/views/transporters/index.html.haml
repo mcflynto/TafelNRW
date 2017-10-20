@@ -1,0 +1,16 @@
+%h1 Übersicht alle Regestrierten Transporter
+
+- @transporter.each do |t|
+  - if current_user.is_admin?
+    %h3 Name:
+    = t.name
+    %h3 Email:
+    = t.email
+    %br/
+    = link_to "Transporter bearbeiten", edit_transporter_path(t)
+
+  - else
+    %h3 Name:
+    = t.name
+    %h3 Email:
+    = t.email
