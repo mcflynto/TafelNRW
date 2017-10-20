@@ -9,7 +9,7 @@ class DonatorsController < ApplicationController
     @donator = Donator.new(donator_params)
     if @donator.save
       flash[:success] = 'Spende eingestellt!'
-      redirect_to donations_path
+      redirect_to donator_donations_path(@donator)
 
     else
       flash[:error] = 'Es ist ein Fehler aufgetreteten'

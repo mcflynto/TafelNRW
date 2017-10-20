@@ -7,13 +7,14 @@ Rails.application.routes.draw do
 
   get 'users/alluser'
 
-  get "logout" => "sessions#destroy", :as => "logout"
-
+  get 'logout' => 'sessions#destroy', :as => 'logout'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'static_pages#home'
 
-  resources :donators
+  resources :donators do
+    resources :donations, only: %i[index show]
+  end
   resources :users do
     member do
       get :activate
@@ -21,4 +22,5 @@ Rails.application.routes.draw do
     end
   end
   resources :sessions
+  resources :donations
 end
