@@ -1,4 +1,5 @@
 class TafelsController < ApplicationController
+  before_action :require_login
   def index
     @tafel = Tafel.all
   end

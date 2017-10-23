@@ -1,5 +1,5 @@
 class TransportersController < ApplicationController
-
+  before_action :require_login
   def index
     @transporter = Transporter.all
   end

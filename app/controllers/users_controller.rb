@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :require_login, only:[:index, :new, :create, :destroy, :edit, :update]
   def index
     @user = User.all
   end
@@ -42,31 +43,12 @@ class UsersController < ApplicationController
   end
 
   def destroy
-
     @user = User.find(params[:id])
     if @user.delete
       redirect_to users_path
-
     else
       render :edit
-
     end
-
-    # if @user == current_user
-    #   if @user.delete
-    #     redirect_to root_path
-    #   else
-    #     render :edit
-    #   end
-    # else
-    #   if @user.delete
-    #     redirect_to users_path
-    #   else
-    #     render :edit
-    #   end
-    # end
-    # debugger
-    # puts('foo')
 
 
   end
