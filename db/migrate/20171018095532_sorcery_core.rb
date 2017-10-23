@@ -7,7 +7,7 @@ class SorceryCore < ActiveRecord::Migration[5.1]
       t.string :salt
       t.string :name
       t.boolean :admin
-      t.references :tafel
+      t.references :organization
 
       t.timestamps                :null => false
     end

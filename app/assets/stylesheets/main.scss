@@ -5,7 +5,7 @@ h1 {
   font-family: Roboto, monospace;
 }
 
-// Donator page
+// Donator
 .donator-form {
   max-width: 400px;
   li {
@@ -13,9 +13,31 @@ h1 {
   }
 }
 
-// Donations overview
+// Donation
 .donations {
 background-color: #d4f2ca;
+  li {
+    list-style: none;
+  }
+}
+
+.donations-overview {
+  li {
+    list-style: none;
+  }
+}
+
+// Transporter
+.transporter-form {
+  max-width: 300px;
+  li {
+    list-style: none;
+  }
+}
+
+// Organization
+.organization-form {
+  max-width: 300px;
   li {
     list-style: none;
   }

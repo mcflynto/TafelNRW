@@ -12,9 +12,9 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'static_pages#home'
 
-  resources :tafels
+  resources :organizations
   resources :transporters
-  resources :donation_tafels
+  resources :donation_organizations
   resources :donators do
     resources :donations, only: %i[index show]
   end
@@ -26,6 +26,6 @@ Rails.application.routes.draw do
   end
   resources :sessions
   resources :donations do
-    resources :donation_tafels
+    resources :donation_organizations
   end
 end

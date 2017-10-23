@@ -19,7 +19,7 @@ class UsersController < ApplicationController
 
   def confirm
     @token = params[:user][:activation_token]
-    if @user == User.load_from_activation_token(@token)
+    if @user = User.load_from_activation_token(@token)
       if @user.update_attributes(user_params)
         @user.activate!
         redirect_to new_session_path, notice: 'Your account is now activated.'
@@ -72,7 +72,7 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(
-      :email, :name, :admin, :tafel_id, :password, :password_confirmation
+      :email, :name, :admin, :organization_id, :password, :password_confirmation
     )
   end
 end

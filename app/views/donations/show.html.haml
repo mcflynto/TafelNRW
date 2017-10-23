@@ -1,5 +1,3 @@
-- if current_user != nil
-  = render '/sessions/logout'
 %h1 Spende
 Der Spender
 = @donator.name
@@ -10,8 +8,13 @@ Menge:
 = @donation.amount
 = @donation.unit
 
-- if current_user != nil
-  = form_for [@donation, @donation_tafel] do |f|
+- if current_user.present?
+  = form_for [@donation, @donation_organization] do |f|
     = f.label :amount
     = f.number_field :amount
     = f.submit "vormerken"
+
+- if current_user.present? && current_user.admin?
+  %div Bestell-Button
+
+= link_to 'Back', :back

@@ -28,14 +28,14 @@ ActiveRecord::Schema.define(version: 20171023095723) do
     t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
   end
 
-  create_table "donation_tafels", force: :cascade do |t|
+  create_table "donation_organizations", force: :cascade do |t|
     t.bigint "donations_id"
-    t.bigint "tafels_id"
+    t.bigint "organizations_id"
     t.integer "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["donations_id"], name: "index_donation_tafels_on_donations_id"
-    t.index ["tafels_id"], name: "index_donation_tafels_on_tafels_id"
+    t.index ["donations_id"], name: "index_donation_organizations_on_donations_id"
+    t.index ["organizations_id"], name: "index_donation_organizations_on_organizations_id"
   end
 
   create_table "donations", force: :cascade do |t|
@@ -53,13 +53,6 @@ ActiveRecord::Schema.define(version: 20171023095723) do
     t.index ["transporter_id"], name: "index_donations_on_transporter_id"
   end
 
-  create_table "donations_tafels", id: false, force: :cascade do |t|
-    t.bigint "donation_id"
-    t.bigint "tafel_id"
-    t.index ["donation_id"], name: "index_donations_tafels_on_donation_id"
-    t.index ["tafel_id"], name: "index_donations_tafels_on_tafel_id"
-  end
-
   create_table "donators", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -67,18 +60,11 @@ ActiveRecord::Schema.define(version: 20171023095723) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "tafels", force: :cascade do |t|
+  create_table "organizations", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "tafels_transporters", id: false, force: :cascade do |t|
-    t.bigint "transporter_id"
-    t.bigint "tafel_id"
-    t.index ["tafel_id"], name: "index_tafels_transporters_on_tafel_id"
-    t.index ["transporter_id"], name: "index_tafels_transporters_on_transporter_id"
   end
 
   create_table "transporters", force: :cascade do |t|
@@ -95,7 +81,7 @@ ActiveRecord::Schema.define(version: 20171023095723) do
     t.string "salt"
     t.string "name"
     t.boolean "admin"
-    t.bigint "tafel_id"
+    t.bigint "organization_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "remember_me_token"
@@ -108,9 +94,9 @@ ActiveRecord::Schema.define(version: 20171023095723) do
     t.datetime "activation_token_expires_at"
     t.index ["activation_token"], name: "index_users_on_activation_token"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["organization_id"], name: "index_users_on_organization_id"
     t.index ["remember_me_token"], name: "index_users_on_remember_me_token"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token"
-    t.index ["tafel_id"], name: "index_users_on_tafel_id"
   end
 
 end

@@ -1,6 +1,6 @@
-%h1 Transportunternehmen bearbeiten
-.transporter-form
-  = bootstrap_form_for @transporter do |f|
+%h1 Organisation bearbeiten
+.organization-form
+  = bootstrap_form_for @organization do |f|
     %ul
       %li
         = f.text_field :name
@@ -13,4 +13,4 @@
         #{a.text_field :plz}
         #{a.text_field :phone}
       %li
-      = f.submit 'Erstellen'
+        = f.submit 'bearbeiten'

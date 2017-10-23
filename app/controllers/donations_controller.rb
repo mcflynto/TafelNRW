@@ -9,6 +9,6 @@ class DonationsController < ApplicationController
   def show
     @donation = Donation.find(params[:id])
     @donator = Donator.find(@donation.donator_id)
-    @donation_tafel = DonationTafel.new
+    @donation_organization = DonationOrganization.new
   end
 end
