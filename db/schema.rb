@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171019102346) do
+ActiveRecord::Schema.define(version: 20171023095723) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,16 @@ ActiveRecord::Schema.define(version: 20171019102346) do
     t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
   end
 
+  create_table "donation_tafels", force: :cascade do |t|
+    t.bigint "donations_id"
+    t.bigint "tafels_id"
+    t.integer "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["donations_id"], name: "index_donation_tafels_on_donations_id"
+    t.index ["tafels_id"], name: "index_donation_tafels_on_tafels_id"
+  end
+
   create_table "donations", force: :cascade do |t|
     t.bigint "donator_id"
     t.bigint "transporter_id"
@@ -41,13 +51,6 @@ ActiveRecord::Schema.define(version: 20171019102346) do
     t.datetime "updated_at", null: false
     t.index ["donator_id"], name: "index_donations_on_donator_id"
     t.index ["transporter_id"], name: "index_donations_on_transporter_id"
-  end
-
-  create_table "donations_tafels", id: false, force: :cascade do |t|
-    t.bigint "donation_id"
-    t.bigint "tafel_id"
-    t.index ["donation_id"], name: "index_donations_tafels_on_donation_id"
-    t.index ["tafel_id"], name: "index_donations_tafels_on_tafel_id"
   end
 
   create_table "donators", force: :cascade do |t|

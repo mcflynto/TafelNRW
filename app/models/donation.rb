@@ -1,7 +1,7 @@
 class Donation < ApplicationRecord
   belongs_to :donator, optional: true
   belongs_to :transporter, optional: true
-  has_and_belongs_to_many :tafels
+  has_many :tafels, through: :donation_tafels
 
   def donation_mail(donator)
     @tafel = Tafel.all

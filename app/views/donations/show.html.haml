@@ -1,0 +1,17 @@
+- if current_user != nil
+  = render '/sessions/logout'
+%h1 Spende
+Der Spender
+= @donator.name
+hat folgendes gespendet
+Essen:
+= @donation.food
+Menge:
+= @donation.amount
+= @donation.unit
+
+- if current_user != nil
+  = form_for [@donation, @donation_tafel] do |f|
+    = f.label :amount
+    = f.number_field :amount
+    = f.submit "vormerken"
