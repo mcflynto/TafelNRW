@@ -53,6 +53,13 @@ ActiveRecord::Schema.define(version: 20171023095723) do
     t.index ["transporter_id"], name: "index_donations_on_transporter_id"
   end
 
+  create_table "donations_tafels", id: false, force: :cascade do |t|
+    t.bigint "donation_id"
+    t.bigint "tafel_id"
+    t.index ["donation_id"], name: "index_donations_tafels_on_donation_id"
+    t.index ["tafel_id"], name: "index_donations_tafels_on_tafel_id"
+  end
+
   create_table "donators", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -65,6 +72,13 @@ ActiveRecord::Schema.define(version: 20171023095723) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "tafels_transporters", id: false, force: :cascade do |t|
+    t.bigint "transporter_id"
+    t.bigint "tafel_id"
+    t.index ["tafel_id"], name: "index_tafels_transporters_on_tafel_id"
+    t.index ["transporter_id"], name: "index_tafels_transporters_on_transporter_id"
   end
 
   create_table "transporters", force: :cascade do |t|
