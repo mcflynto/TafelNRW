@@ -1,20 +1,22 @@
-%h1 Spende
-Der Spender
-= @donator.name
-hat folgendes gespendet
-Essen:
-= @donation.food
-Menge:
-= @donation.amount
-= @donation.unit
+.container-fluid
+  %h1 Spende
+  Der Spender
+  = @donator.name
+  hat folgendes gespendet
+  Essen:
+  = @donation.food
+  Menge:
+  = @donation.amount
+  = @donation.unit
 
-- if current_user.present?
-  = form_for [@donation, @donation_organization] do |f|
-    = f.label :amount
-    = f.number_field :amount
-    = f.submit "vormerken"
+  - if current_user.present?
+    = form_for [@donation, @donation_organization] do |f|
+      = f.label :amount
+      = f.number_field :amount
+      = f.submit 'Vormerken'
 
-- if current_user.present? && current_user.admin?
-  %div Bestell-Button
+  - if current_user.present? && current_user.admin?
+    =button_to 'Anfordern', delivery_donation_path, data: { confirm: 'Sicher?' }
 
-= link_to 'Back', :back
+
+  = link_to 'Back', :back

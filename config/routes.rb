@@ -7,9 +7,8 @@ Rails.application.routes.draw do
 
   get 'users/alluser'
 
-  get 'logout' => 'sessions#destroy', :as => 'logout'
+  get 'logout' => 'sessions#destroy',     :as => 'logout'
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'static_pages#home'
 
   resources :organizations
@@ -27,5 +26,6 @@ Rails.application.routes.draw do
   resources :sessions
   resources :donations do
     resources :donation_organizations
+    post 'delivery', on: :member
   end
 end
