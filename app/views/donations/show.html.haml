@@ -1,24 +1,22 @@
-- if current_user != nil
-  = render '/sessions/logout'
-%h1 Spende
-Der Spender
-= @donator.name
-hat folgendes gespendet
-Essen:
-= @donation.food
-Menge:
-= @donation.amount
-= @donation.unit
-Noch vorhandene Menge
-= @donation.amount - @donation.ordered_amount
+.container-fluid
+  %h1 Spende
+  Der Spender
+  = @donator.name
+  hat folgendes gespendet
+  Essen:
+  = @donation.food
+  Menge:
+  = @donation.amount
+  = @donation.unit
 
-- if current_user != nil && @d_tafel == nil
-  = form_for [@donation, @donation_tafel] do |f|
-    = f.label :amount
-    = f.number_field :amount
-    = f.submit "vormerken"
-- else
-  = form_for [@donation, @d_tafel] do |f|
-    = f.label :amount
-    = f.number_field :amount
-    = f.submit "Bestellung bearbeiten"
+  - if current_user.present?
+    = form_for [@donation, @donation_organization] do |f|
+      = f.label :amount
+      = f.number_field :amount
+      = f.submit 'Vormerken'
+
+  - if current_user.present? && current_user.admin?
+    =button_to 'Anfordern', delivery_donation_path, data: { confirm: 'Sicher?' }
+
+
+  = link_to 'Back', :back

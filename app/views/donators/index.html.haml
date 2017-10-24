@@ -1,11 +1,13 @@
-= render '/sessions/logout'
+|
 = link_to 'Userliste', users_path
-%h1 Spendenübersicht
-%ul
-- @donator.each do |donator|
-  %li #{donator.name}
+
+.container-fluid.donations
+  %h1 Spendenübersicht
   %ul
-  - donator.donations.each do |donations|
-    %li #{donations.food}
-    %li #{donations.amount}
-    %li #{donations.unit}
+  - @donator.each do |donator|
+    %li #{donator.name}
+    - donator.donations.each do |donations|
+      #{donations.food}
+      #{donations.amount}
+      #{donations.unit}
+      = link_to 'zur Spende', donator_donations_path(donator)

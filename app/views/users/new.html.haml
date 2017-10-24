@@ -1,4 +1,3 @@
--# = render '/sessions/logout'
 %h1 Neuen Mitarbeiter erstellen
 = form_for @user do |f|
   = f.label :name
@@ -7,5 +6,5 @@
   = f.email_field :email
   = f.label :admin
   = f.check_box :admin
-  = f.collection_radio_buttons(:tafel_id, Tafel.all, :id, :name)
+  = f.collection_radio_buttons(:organization_id, Organization.all, :id, :name)
   = f.submit 'Erstellen'

@@ -1,0 +1,19 @@
+|
+= link_to 'Spendenübersicht', donators_path
+
+%h1 Übersicht aller registrierten Organisationen
+
+- @organization.each do |t|
+  - if current_user.is_admin?
+    %h3 Name:
+    = t.name
+    %h3 Email:
+    = t.email
+    %br/
+    = link_to "Organisation bearbeiten", edit_organization_path(t)
+
+  - else
+    %h3 Name:
+    = t.name
+    %h3 Email:
+    = t.email

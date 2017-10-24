@@ -1,0 +1,8 @@
+- if current_user.present?
+  %b Du bist eingeloggt als
+  %em
+  = link_to current_user.email, edit_user_path(current_user)
+  |
+  = link_to "logout", logout_path , methode: 'DELETE'
+  |
+  = link_to "Home", root_path

@@ -1,3 +1,4 @@
+# UsersController
 class UsersController < ApplicationController
   # before_action :require_login, only:[:index, :new, :create, :destroy, :edit, :update]
   def index
@@ -21,7 +22,7 @@ class UsersController < ApplicationController
     if @user = User.load_from_activation_token(@token)
       if @user.update_attributes(user_params)
         @user.activate!
-        redirect_to new_session_path, :notice => 'Your account is now activated.'
+        redirect_to new_session_path, notice: 'Your account is now activated.'
       else
         render :activate
       end
@@ -33,11 +34,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:notice] = "Neuer Nutzer konnte angelegt werden"
+      flash[:notice] = 'Neuer Nutzer konnte angelegt werden'
       UserMailer.activation_needed_email(@user).deliver_now
       redirect_to users_path
     else
-      flash[:notice] = "Neuer Nutzer konnte nicht erstellt werden"
+      flash[:notice] = 'Neuer Nutzer konnte nicht erstellt werden'
       render :new
     end
   end
@@ -49,8 +50,6 @@ class UsersController < ApplicationController
     else
       render :edit
     end
-
-
   end
 
   def edit
@@ -61,16 +60,19 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if @user.update(user_params)
-      flash[:notice] = "Nutzer wurde verändert"
+      flash[:notice] = 'Nutzer wurde verändert'
       redirect_to users_path
     else
-      flash[:notice] = "Nutzer wurde nicht verändert"
+      flash[:notice] = 'Nutzer wurde nicht verändert'
       render :edit
     end
   end
 
-private
+  private
+
   def user_params
-    params.require(:user).permit(:email, :name, :admin, :tafel_id, :password, :password_confirmation)
+    params.require(:user).permit(
+      :email, :name, :admin, :organization_id, :password, :password_confirmation
+    )
   end
 end

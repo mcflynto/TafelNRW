@@ -1,6 +1,10 @@
 # Sessions Controller
 class SessionsController < ApplicationController
-  def new; end
+  def new
+    if current_user
+      redirect_to donators_path
+    end
+  end
 
   def create
     @user = login(session_params[:email], session_params[:password])
