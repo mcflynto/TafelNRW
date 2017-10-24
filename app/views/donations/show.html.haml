@@ -25,5 +25,18 @@
   - if current_user.present? && current_user.admin?
     =button_to 'Anfordern', delivery_donation_path, data: { confirm: 'Sicher?' }
 
+  %table
+    %thead
+      %tr
+        %th Tafel
+        %th Menge
+        %th Einheit
+    %tbody
+      - @shares.each do |s|
+        %tr
+          %td= s.organization.name
+          %td= s.amount
+          %td= @donation.unit
+
 
   = link_to 'Back', :back

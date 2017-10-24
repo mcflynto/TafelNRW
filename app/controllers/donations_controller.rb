@@ -10,6 +10,7 @@ class DonationsController < ApplicationController
     @donator = Donator.find(@donation.donator_id)
     @share = Share.new
     @share_organization = Share.where(organization: current_user.organization).first
+    @shares = Share.all
   end
 
   def delivery
