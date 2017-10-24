@@ -9,8 +9,16 @@
   Organisationen die beliefert werden müssen:
   %br/
   - @shares.each do |s|
-    Organisations-ID//
-    = s.organization_id
-    Teilmenge//
-    = s.amount
-    %br/
+    .orga-list
+      Organisations-Name ->
+      = s.organization.name
+      %br/
+      Organisations-Adresse ->
+      %ul
+        %li Straße: #{s.organization.address.street}
+        %li Hausnummer: #{s.organization.address.house_number}
+        %li Stadt: #{s.organization.address.city}
+        %li Postleitzahl: #{s.organization.address.plz}
+      Teilmenge ->
+      = s.amount
+      = @donation.unit

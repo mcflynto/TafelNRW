@@ -7,7 +7,7 @@ class TransporterMailer < ApplicationMailer
     @donator = donator
     @organizations = organizations
     @transporter = transporter
-    @url = "http://0.0.0.0:3000/donations/#{@donation.id}"
+    @url = "http://0.0.0.0:3000/donations/#{@donation.id}/transport"
     mail(to: @transporter.email, subject: 'Transport angefordert')
   end
 end
