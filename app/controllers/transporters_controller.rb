@@ -32,7 +32,9 @@ class TransportersController < ApplicationController
       render :edit
     end
   end
-private
+
+  private
+
   def transporter_params
     params.require(:transporter).permit(
       :name,

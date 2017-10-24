@@ -24,4 +24,11 @@ class DonationsController < ApplicationController
     end
     redirect_to donation_path(@donation)
   end
+
+  def transport
+    @donation = Donation.find(params[:id])
+    @donator = Donator.find(@donation.donator_id)
+    @shares = Share.where(donation_id: @donation)
+    @transporter = 1
+  end
 end

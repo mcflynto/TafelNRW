@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   get 'users/alluser'
 
-  get 'logout' => 'sessions#destroy',     :as => 'logout'
+  get 'logout' => 'sessions#destroy', :as => 'logout'
 
   get 'login' => 'donators#login', :as => 'login'
 
@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   resources :sessions
   resources :donations do
     resources :shares
-    post 'delivery', on: :member
+    post 'delivery',  on: :member
+    get  'transport', on: :member
   end
 end
