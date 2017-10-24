@@ -8,7 +8,8 @@ class DonationsController < ApplicationController
   def show
     @donation = Donation.find(params[:id])
     @donator = Donator.find(@donation.donator_id)
-    @donation_organization = DonationOrganization.new
+    @share = Share.new
+    @share_organization = Share.where(organization: current_user.organization).first
   end
 
   def delivery

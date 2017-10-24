@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   resources :organizations
   resources :transporters
-  resources :donation_organizations
+  resources :shares
   resources :donators do
     resources :donations, only: %i[index show]
   end
@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   end
   resources :sessions
   resources :donations do
-    resources :donation_organizations
+    resources :shares
     post 'delivery', on: :member
   end
 end

@@ -28,16 +28,6 @@ ActiveRecord::Schema.define(version: 20171023095723) do
     t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
   end
 
-  create_table "donation_organizations", force: :cascade do |t|
-    t.bigint "donations_id"
-    t.bigint "organizations_id"
-    t.integer "amount"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["donations_id"], name: "index_donation_organizations_on_donations_id"
-    t.index ["organizations_id"], name: "index_donation_organizations_on_organizations_id"
-  end
-
   create_table "donations", force: :cascade do |t|
     t.bigint "donator_id"
     t.bigint "transporter_id"
@@ -66,6 +56,16 @@ ActiveRecord::Schema.define(version: 20171023095723) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "shares", force: :cascade do |t|
+    t.bigint "donation_id"
+    t.bigint "organization_id"
+    t.integer "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["donation_id"], name: "index_shares_on_donation_id"
+    t.index ["organization_id"], name: "index_shares_on_organization_id"
   end
 
   create_table "transporters", force: :cascade do |t|

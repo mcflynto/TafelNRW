@@ -1,7 +1,7 @@
 class Donation < ApplicationRecord
   belongs_to :donator, optional: true
   belongs_to :transporter, optional: true
-  has_many :organizations, through: :donation_organizations
+  has_many :organizations, through: :shares
 
   def donation_mail(donator)
     @organization = Organization.all

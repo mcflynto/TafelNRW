@@ -8,12 +8,19 @@
   Menge:
   = @donation.amount
   = @donation.unit
+  Verbleibende Menge:
+  = @donation.amount - @donation.ordered_amount
 
-  - if current_user.present?
-    = form_for [@donation, @donation_organization] do |f|
+  - if current_user.present? && @share_organization == nil
+    = form_for [@donation, @share] do |f|
       = f.label :amount
       = f.number_field :amount
       = f.submit 'Vormerken'
+  - else
+    = form_for [@donation, @share_organization] do |f|
+      = f.label :amount
+      = f.number_field :amount
+      = f.submit 'bearbeiten'
 
   - if current_user.present? && current_user.admin?
     =button_to 'Anfordern', delivery_donation_path, data: { confirm: 'Sicher?' }
