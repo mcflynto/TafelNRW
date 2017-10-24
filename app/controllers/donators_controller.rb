@@ -6,7 +6,7 @@ class DonatorsController < ApplicationController
 
   def new
     @donator = Donator.new
-    @donation = Donation.new
+    @donation = @donator.donations.new
   end
 
   def login
@@ -26,6 +26,7 @@ class DonatorsController < ApplicationController
 
   def create
     @donator = Donator.new(donator_params)
+    @donation = @donator.donations.new(donation_params)
 
     if @donator.save
       @donator.donations.last.donation_mail(@donator)
@@ -46,9 +47,11 @@ class DonatorsController < ApplicationController
       :name,
       :email,
       { address_attributes:
-        %i[street house_number city plz phone] },
-      { donations_attributes:
-        %i[food amount unit expiry_date] }
+        %i[street house_number city plz phone] }
     )
+  end
+
+  def donation_params
+    params.require(:donator).require(:donations_attributes).permit(:food, :amount, :unit, :expiry_date)
   end
 end

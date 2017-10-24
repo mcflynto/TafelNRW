@@ -22,3 +22,7 @@
       Teilmenge ->
       = s.amount
       = @donation.unit
+  - if @donation.confirmed?
+    .btn.btn-success Transport bestätigt!
+  - else
+    =button_to 'Transport bestätigen', confirm_transport_donation_path, data: { confirm: 'Sicher?' }, class: 'btn btn-info'

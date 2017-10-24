@@ -17,7 +17,6 @@ Rails.application.routes.draw do
 
   resources :organizations
   resources :transporters
-  #resources :shares
   resources :donators do
     resources :donations, only: %i[index show]
   end
@@ -30,7 +29,8 @@ Rails.application.routes.draw do
   resources :sessions
   resources :donations do
     resources :shares
-    post 'delivery',  on: :member
-    get  'transport', on: :member
+    post 'delivery',          on: :member
+    get  'transport',         on: :member
+    post 'confirm_transport', on: :member
   end
 end
