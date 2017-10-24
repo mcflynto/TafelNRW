@@ -30,7 +30,7 @@
     - if current_user.present? && current_user.admin? && @share_organization.pick_up == false
       =button_to 'Anfordern', delivery_donation_path, data: { confirm: 'Sicher?' }, class: 'btn btn-danger'
     - else
-      =button_to 'Selbstabholen', pickup_donation_path, data: { confirm: 'Sicher?' }
+      =button_to 'Selbstabholen', pickup_donation_path, data: { confirm: 'Sicher?' }, class: 'btn btn-info'
   %table
     %thead
       %tr

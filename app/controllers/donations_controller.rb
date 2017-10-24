@@ -43,21 +43,19 @@ class DonationsController < ApplicationController
   def pickup
     @donation = Donation.find(params[:id])
     @shares = Share.where(donation_id: @donation)
-    debugger
-    puts("foo")
   end
 
   def collection
     @donation = Donation.find(params[:id])
     @organization = current_user.organization
-    @donator = Donator.find(@donation.donator_id)
+    @donator = @donation.donator
     DonatorMailer.pickup_email(@donation, @organization, @donator).deliver_later
   end
 
   def transport
     @donation = Donation.find(params[:id])
-    @donator = Donator.find(@donation.donator_id)
-    @shares = Share.where(donation_id: @donation)
+    @donator = @donation.donator
+    @shares = @donation.shares
   end
 
   def confirm_transport
