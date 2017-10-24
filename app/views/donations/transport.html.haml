@@ -1,0 +1,16 @@
+.container-fluid
+  %h1 Zusammenfassung Transport
+  Spende:
+  %br/
+  = @donation.food
+  = @donation.amount
+  = @donation.unit
+  %br/
+  Organisationen die beliefert werden müssen:
+  %br/
+  - @shares.each do |s|
+    Organisations-ID//
+    = s.organization_id
+    Teilmenge//
+    = s.amount
+    %br/
