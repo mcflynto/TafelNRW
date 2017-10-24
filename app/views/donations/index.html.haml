@@ -3,6 +3,7 @@
   %p Hello #{@donator.name}
   %p Donations:
   %ul
+  = link_to "Neue Donation erstellen", new_donator_donation_path
   - @donations.each do |d|
     %p Donation #{d.id}
     %li= d.food

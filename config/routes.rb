@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   resources :transporters
   #resources :shares
   resources :donators do
-    resources :donations, only: %i[index show]
+    resources :donations, only: %i[index show new create]
   end
   resources :users do
     member do
