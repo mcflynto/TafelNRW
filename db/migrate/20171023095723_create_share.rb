@@ -4,6 +4,8 @@ class CreateShare < ActiveRecord::Migration[5.1]
       t.references :donation
       t.references :organization
       t.integer :amount
+      t.boolean :pick_up
+      t.string :pick_up_date
 
       t.timestamps
     end

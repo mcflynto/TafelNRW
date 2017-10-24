@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   post 'verification' => 'donators#verification', :as => 'verification'
 
+
   root to: 'static_pages#home'
 
   resources :organizations
@@ -32,5 +33,6 @@ Rails.application.routes.draw do
     post 'delivery',          on: :member
     get  'transport',         on: :member
     post 'confirm_transport', on: :member
+    get 'pickup', on: :member
   end
 end

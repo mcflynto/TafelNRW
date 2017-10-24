@@ -33,6 +33,6 @@ class SharesController < ApplicationController
   private
 
   def share_params
-    params.require(:share).permit(:amount)
+    params.require(:share).permit(:amount , :pick_up)
   end
 end
