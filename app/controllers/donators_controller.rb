@@ -14,9 +14,7 @@ class DonatorsController < ApplicationController
   end
 
   def verification
-
     @donator = Donator.where(email: donator_params[:email]).first
-
 
     if @donator
       redirect_to donator_donations_path(@donator)
