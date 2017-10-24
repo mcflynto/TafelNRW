@@ -1,0 +1,5 @@
+Bitte Trage deine Email ein
+= form_for @donator, url: verification_url(@donator), :method => :POST do |f|
+  = f.label :email
+  = f.email_field :email
+  = f.submit "Login"

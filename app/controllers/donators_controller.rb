@@ -9,6 +9,23 @@ class DonatorsController < ApplicationController
     @donation = Donation.new
   end
 
+  def login
+    @donator = Donator.new
+  end
+
+  def verification
+
+    @donator = Donator.where(email: donator_params[:email]).first
+
+
+    if @donator
+      redirect_to donator_donations_path(@donator)
+    else
+      @donator = Donator.new
+      render :login
+    end
+  end
+
   def create
     @donator = Donator.new(donator_params)
 
