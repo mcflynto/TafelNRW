@@ -9,9 +9,16 @@ Essen:
 Menge:
 = @donation.amount
 = @donation.unit
+Noch vorhandene Menge
+= @donation.amount - @donation.ordered_amount
 
-- if current_user != nil
+- if current_user != nil && @d_tafel == nil
   = form_for [@donation, @donation_tafel] do |f|
     = f.label :amount
     = f.number_field :amount
     = f.submit "vormerken"
+- else
+  = form_for [@donation, @d_tafel] do |f|
+    = f.label :amount
+    = f.number_field :amount
+    = f.submit "Bestellung bearbeiten"

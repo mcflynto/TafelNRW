@@ -14,7 +14,6 @@ Rails.application.routes.draw do
 
   resources :tafels
   resources :transporters
-  resources :donation_tafels
   resources :donators do
     resources :donations, only: %i[index show]
   end

@@ -11,6 +11,7 @@ class DonatorsController < ApplicationController
 
   def create
     @donator = Donator.new(donator_params)
+
     if @donator.save
       @donator.donations.last.donation_mail(@donator)
       DonationMailer.donation_email_donator(@donator, @donator.donations.last).deliver_now
@@ -32,7 +33,7 @@ class DonatorsController < ApplicationController
       { address_attributes:
         %i[street house_number city plz phone] },
       { donations_attributes:
-        %i[food amount unit] }
+        %i[food amount unit expiry_date] }
     )
   end
 end

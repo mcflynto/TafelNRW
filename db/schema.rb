@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20171023095723) do
     t.string "expiry_date"
     t.boolean "ordered"
     t.string "delivery_date"
+    t.integer "ordered_amount", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["donator_id"], name: "index_donations_on_donator_id"
