@@ -9,7 +9,7 @@ class CreateDonation < ActiveRecord::Migration[5.1]
       t.string :expiry_date
       t.boolean :ordered
       t.string :delivery_date
-      t.integer :ordered_amount , :default => 0
+
 
       t.timestamps
     end

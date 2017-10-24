@@ -7,7 +7,6 @@ class SharesController < ApplicationController
 
     if @share.save
       flash[:notice] = "Neue Spende für diese Tafel wurde angelegt"
-      @donation.change_amount(@share.amount)
       redirect_to donation_path(@donation)
     else
       flash[:notice] = "Es konnte keine neue Spende angelegt werden"
@@ -22,7 +21,6 @@ class SharesController < ApplicationController
     @amount = @share.amount
     if @share.update(share_params)
       flash[:notice] = "Spende konnte geändert werden"
-      @donation.update_amount(@amount, @share.amount)
       redirect_to donation_path(@donation)
     else
       flash[:notice] = "Spende konnte nicht geändert werden"

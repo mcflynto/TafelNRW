@@ -37,7 +37,6 @@ ActiveRecord::Schema.define(version: 20171024114809) do
     t.string "expiry_date"
     t.boolean "ordered"
     t.string "delivery_date"
-    t.integer "ordered_amount", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "confirmed"

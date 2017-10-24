@@ -9,7 +9,7 @@
   = @donation.amount
   = @donation.unit
   Verbleibende Menge:
-  = @donation.amount - @donation.ordered_amount
+  = @donation.amount - @donation.shares.sum(:amount)
 
   - if current_user.present? && @share_organization == nil
     = form_for [@donation, @share] do |f|
