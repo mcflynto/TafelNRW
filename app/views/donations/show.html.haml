@@ -15,28 +15,36 @@
     = form_for [@donation, @share] do |f|
       = f.label :amount
       = f.number_field :amount
+      = f.label :pick_up
+      = f.check_box :pick_up
       = f.submit 'Vormerken'
   - else
     = form_for [@donation, @share_organization] do |f|
       = f.label :amount
       = f.number_field :amount
+      = f.label :pick_up
+      = f.check_box :pick_up
       = f.submit 'bearbeiten'
-
-  - if current_user.present? && current_user.admin?
-    =button_to 'Anfordern', delivery_donation_path, data: { confirm: 'Sicher?' }
-
+  - if @share_organization != nil
+    - if current_user.present? && current_user.admin? && @share_organization.pick_up == false
+      =button_to 'Anfordern', delivery_donation_path, data: { confirm: 'Sicher?' }
+    - else
+      =button_to 'Selbstabholen', pickup_donation_path, data: { confirm: 'Sicher?' }
   %table
     %thead
       %tr
         %th Tafel
         %th Menge
         %th Einheit
+        %th Selbstabholung
     %tbody
       - @shares.each do |s|
         %tr
           %td= s.organization.name
           %td= s.amount
           %td= @donation.unit
+          %td= s.pick_up
+
 
 
   = link_to 'Back', :back

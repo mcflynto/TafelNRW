@@ -62,6 +62,8 @@ ActiveRecord::Schema.define(version: 20171023095723) do
     t.bigint "donation_id"
     t.bigint "organization_id"
     t.integer "amount"
+    t.boolean "pick_up"
+    t.string "pick_up_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["donation_id"], name: "index_shares_on_donation_id"

@@ -1,0 +1,9 @@
+%h1 Selbstabholung
+
+Bitte trage ein Datum für die Selbstabholung ein
+= form_for [@donation, @share] do |f|
+  = f.label :amount
+  = f.number_field :amount
+  = f.label :pick_up_date
+  = f.text_field :pick_up_date
+  = f.submit "Jetzt selbst abholen"

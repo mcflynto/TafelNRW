@@ -13,11 +13,11 @@ Rails.application.routes.draw do
 
   post 'verification' => 'donators#verification', :as => 'verification'
 
+
   root to: 'static_pages#home'
 
   resources :organizations
   resources :transporters
-  #resources :shares
   resources :donators do
     resources :donations, only: %i[index show new create]
   end
@@ -32,5 +32,6 @@ Rails.application.routes.draw do
     resources :shares
     post 'delivery',  on: :member
     get  'transport', on: :member
+    get 'pickup', on: :member
   end
 end
