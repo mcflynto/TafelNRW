@@ -7,7 +7,7 @@ class DonationsController < ApplicationController
 
   def new
     @donation = Donation.new
-    @donator = Donator.find(params[:donator_id])
+    @donator = @donation.donator
   end
 
   def create
@@ -17,6 +17,15 @@ class DonationsController < ApplicationController
       redirect_to donator_donations_path(@donator)
     else
       render :new
+    end
+  end
+
+  def update
+    @donation = Donation.find(params[:id])
+    if @donation.update(transporter_donation_params)
+      redirect_to transport_donation_path(@donation)
+    else
+      render :transport
     end
   end
 
@@ -31,18 +40,17 @@ class DonationsController < ApplicationController
   def delivery
     @donation = Donation.find(params[:id])
     @donator = @donation.donator
-    @organizations = 'participating organizations'
     @transporter = Transporter.all
     @transporter.each do |trans|
       TransporterMailer.transporter_email(@donation, @donator,
-                                          @organizations, trans).deliver_later
+                                          trans).deliver_later
     end
     redirect_to donation_path(@donation)
   end
 
   def pickup
     @donation = Donation.find(params[:id])
-    @shares = Share.where(donation_id: @donation)
+    @shares = @donation.shares
   end
 
   def collection
@@ -63,12 +71,17 @@ class DonationsController < ApplicationController
     @donator = @donation.donator
     @shares = @donation.shares
 
-
     @donation.update(confirmed: true)
     redirect_to transport_donation_path(@donation)
   end
-private
+
+  private
+
   def donation_params
     params.require(:donation).permit(:food, :amount, :unit, :expiry_date)
+  end
+
+  def transporter_donation_params
+    params.require(:donation).permit(:delivery_date)
   end
 end
