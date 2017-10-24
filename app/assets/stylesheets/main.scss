@@ -35,6 +35,14 @@ background-color: #d4f2ca;
   }
 }
 
+.orga-list {
+  background-color: rgb(146, 217, 238);
+  margin-bottom: 4px;
+  li {
+    list-style: none;
+  }
+}
+
 // Organization
 .organization-form {
   max-width: 300px;

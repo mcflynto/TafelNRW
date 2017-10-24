@@ -2,8 +2,7 @@ class SharesController < ApplicationController
 
   def create
     @donation = Donation.find(params[:donation_id])
-    @share = Share.new(share_params)
-    @share.donation = @donation
+    @share = @donation.shares.new(share_params)
     @share.organization = current_user.organization
 
     if @share.save
@@ -17,8 +16,9 @@ class SharesController < ApplicationController
   end
 
   def update
-    @share = Share.find(params[:id])
-    @donation = @share.donation
+    @donation = Donation.find(params[:donation_id])
+    @share = @donation.shares.find(params[:id])
+
     @amount = @share.amount
     if @share.update(share_params)
       flash[:notice] = "Spende konnte geändert werden"

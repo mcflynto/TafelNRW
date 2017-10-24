@@ -22,15 +22,15 @@ class DonationsController < ApplicationController
 
   def show
     @donation = Donation.find(params[:id])
-    @donator = Donator.find(@donation.donator_id)
+    @donator = @donation.donator
     @share = Share.new
-    @share_organization = Share.where(organization: current_user.organization).first
-    @shares = Share.all
+    @share_organization = @donation.shares.where(organization: current_user.organization).first
+    @shares = @donation.shares.all
   end
 
   def delivery
     @donation = Donation.find(params[:id])
-    @donator = Donator.find(@donation.donator_id)
+    @donator = @donation.donator
     @organizations = 'participating organizations'
     @transporter = Transporter.all
     @transporter.each do |trans|
@@ -44,7 +44,16 @@ class DonationsController < ApplicationController
     @donation = Donation.find(params[:id])
     @donator = Donator.find(@donation.donator_id)
     @shares = Share.where(donation_id: @donation)
-    @transporter = 1
+  end
+
+  def confirm_transport
+    @donation = Donation.find(params[:id])
+    @donator = @donation.donator
+    @shares = @donation.shares
+
+
+    @donation.update(confirmed: true)
+    redirect_to transport_donation_path(@donation)
   end
 private
   def donation_params
