@@ -3,7 +3,12 @@ Transportunternehmer!
 
 Es wurde ein Transport für eine Spende an folgende Tafeln angefordert:
 
-= @organizations
+- @shares.each do |o|
+  = o.organization.name
+  = o.organization.address.street
+  = o.organization.address.house_number
+  = o.organization.address.city
+  = o.organization.address.plz
 
 
 Bei der Spende handelt es sich um:
@@ -11,6 +16,8 @@ Bei der Spende handelt es sich um:
 Menge:
 = @donation.amount
 = @donation.unit
+
+von: #{@donator.name}
 
 Zur Spende gehen:
 = link_to "Zur Spende", @url
