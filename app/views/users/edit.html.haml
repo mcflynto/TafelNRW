@@ -1,6 +1,6 @@
 %h1 Mitarbeiter bearbeiten
 
--#- if current_user.is_admin?
+- if current_user.is_admin?
   = form_for @user do |f|
     = f.label :name
     = f.text_field :name
@@ -10,7 +10,7 @@
     = f.check_box :admin
     = f.collection_radio_buttons(:organization_id, Organization.all, :id, :name)
     = f.submit 'Bearbeiten'
--#- else
+- else
   = form_for @user do |f|
     = f.label :name
     = f.text_field :name

@@ -31,7 +31,10 @@ class DonationsController < ApplicationController
     @donator = Donator.find(params[:donator_id])
     @donation = @donator.donations.new(donation_params)
     if @donation.save
+      @donation.donation_mail(@donator)
+      DonationMailer.donation_email_donator(@donator, @donation).deliver_now
       redirect_to donator_donations_path(@donator)
+
     else
       render :new
     end

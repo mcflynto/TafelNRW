@@ -1,18 +1,29 @@
-Hallo Organisation
-= @organization.name
-
-Es ist eine neue Spende eingetroffen.
-
-Der Spender
-= @donator.name
-hat folgendes gespendet.
-
-
-Essen:
-= @donation.food
-Menge:
-= @donation.amount
-= @donation.unit
-
-Zur Spende gehen:
+Hallo Tafel,
+%br/
+Es ist eine neue Spende eingetroffen. Die Spende ist von dem Spender #{@donator.name}
+%br/
+Die Spende beinhaltet:
+%br/
+%br/
+Essen: #{@donation.food}
+%br/
+Menge: #{@donation.amount} #{@donation.unit}
+%br/
 = link_to "Zur Spende", @url
+%br/
+%br/
+
+Informationen zum Spender:
+%br/
+%br/
+Spender: #{@donator.name}
+%br/
+Email: #{@donator.email}
+%br/
+Adresse
+%br/
+#{@donator.address.street} #{@donator.address.house_number}
+%br/
+#{@donator.address.city}
+%br/
+#{@donator.address.phone}
