@@ -1,0 +1,10 @@
+%h1 Selbstabholung
+
+Bitte gebe ein Datum für die Selbstabholung an
+
+= form_for [@donation, @share], url: pickup_donation_share_path do |f|
+  = f.label :amount
+  = f.number_field :amount
+  = f.label :pick_up_date
+  = f.text_field :pick_up_date
+  = f.submit "Selbstabholung einreichen"

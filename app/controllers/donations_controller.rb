@@ -6,8 +6,8 @@ class DonationsController < ApplicationController
   end
 
   def new
-    @donation = Donation.new
-    @donator = @donation.donator
+    @donator = Donator.find(params[:donator_id])
+    @donation = @donator.donations.new
   end
 
   def create
@@ -48,17 +48,6 @@ class DonationsController < ApplicationController
     redirect_to donation_path(@donation)
   end
 
-  def pickup
-    @donation = Donation.find(params[:id])
-    @shares = @donation.shares
-  end
-
-  def collection
-    @donation = Donation.find(params[:id])
-    @organization = current_user.organization
-    @donator = @donation.donator
-    DonatorMailer.pickup_email(@donation, @organization, @donator).deliver_later
-  end
 
   def transport
     @donation = Donation.find(params[:id])

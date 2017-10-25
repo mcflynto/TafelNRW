@@ -29,10 +29,12 @@ Rails.application.routes.draw do
   end
   resources :sessions
   resources :donations do
-    resources :shares
+    resources :shares do
+      patch 'pickup', on: :member
+    end
     post 'delivery',          on: :member
     get  'transport',         on: :member
     post 'confirm_transport', on: :member
-    get 'pickup', on: :member
+
   end
 end

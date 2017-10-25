@@ -1,5 +1,11 @@
 class SharesController < ApplicationController
 
+  def edit
+    @donation = Donation.find(params[:donation_id])
+    @share = @donation.shares.find(params[:id])
+
+  end
+
   def create
     @donation = Donation.find(params[:donation_id])
     @share = @donation.shares.new(share_params)
@@ -28,9 +34,25 @@ class SharesController < ApplicationController
     end
   end
 
+  def pickup
+    @donation = Donation.find(params[:donation_id])
+    @share = @donation.shares.find(params[:id])
+    @organization = current_user.organization
+    @donator = @donation.donator
+    if @share.update(share_params)
+      flash[:notice] = "Selbstabholung spende ist Angefragt"
+      DonatorMailer.pickup_email(@donation, @organization, @donator, @share).deliver_now
+      redirect_to donators_path
+
+    else
+      render :edit
+    end
+
+  end
+
   private
 
   def share_params
-    params.require(:share).permit(:amount , :pick_up)
+    params.require(:share).permit(:amount , :pick_up, :pick_up_date)
   end
 end
