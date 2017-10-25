@@ -48,7 +48,6 @@ class DonationsController < ApplicationController
     redirect_to donation_path(@donation)
   end
 
-
   def transport
     @donation = Donation.find(params[:id])
     @donator = @donation.donator
@@ -59,8 +58,18 @@ class DonationsController < ApplicationController
     @donation = Donation.find(params[:id])
     @donator = @donation.donator
     @shares = @donation.shares
+    # TODO: find the right transporter by email link
+    @transporter = Transporter.find(1)
+    @donation.transporter = @transporter
 
-    @donation.update(confirmed: true)
+    TransporterMailer.transport_confirmed_mail(@donation).deliver_later
+    DonatorMailer.transport_confirmed_mail(@donation).deliver_later
+    @shares.each do |share|
+      OrganizationMailer.transport_confirmed_mail(@donation, share).deliver_later
+    end
+
+    # TODO: put back in after testing:
+    # @donation.update(confirmed: true)
     redirect_to transport_donation_path(@donation)
   end
 
