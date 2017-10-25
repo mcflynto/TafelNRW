@@ -1,0 +1,30 @@
+.container-fluid
+  %h1 Spende
+  Der Spender
+  = @donator.name
+  hat folgendes gespendet
+  Essen:
+  = @donation.food
+  Menge:
+  = @donation.amount
+  = @donation.unit
+  Verbleibende Menge:
+  = @donation.amount - @donation.shares.sum(:amount)
+  %table
+    %thead
+      %tr
+        %th Tafel
+        %th Menge
+        %th Einheit
+        %th Selbstabholung
+    %tbody
+      - @shares.each do |s|
+        %tr
+          %td= s.organization.name
+          %td= s.amount
+          %td= @donation.unit
+          %td= s.pick_up
+
+
+
+  = link_to 'Back', :back

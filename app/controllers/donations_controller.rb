@@ -1,5 +1,6 @@
 # Donations Controller
 class DonationsController < ApplicationController
+  before_action :require_login, only:[:show ,:delivery, :transport, :confirm_transport ]
   def index
     @donator = Donator.find(params[:donator_id])
     @donations = @donator.donations
@@ -34,6 +35,12 @@ class DonationsController < ApplicationController
     @donator = @donation.donator
     @share = Share.new
     @share_organization = @donation.shares.where(organization: current_user.organization).first
+    @shares = @donation.shares.all
+  end
+
+  def show_donator
+    @donation = Donation.find(params[:id])
+    @donator = @donation.donator
     @shares = @donation.shares.all
   end
 

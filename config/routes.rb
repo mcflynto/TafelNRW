@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     post 'delivery',          on: :member
     get  'transport',         on: :member
     post 'confirm_transport', on: :member
+    get 'show_donator', on: :member
 
   end
 end

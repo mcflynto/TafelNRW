@@ -9,4 +9,7 @@
     %li= d.food
     %li= d.amount
     %li= d.unit
-    %li= link_to 'single donation', donation_path(d.id)
+    - if current_user
+      %li= link_to 'single donation', donation_path(d)
+    - else
+      %li= link_to 'single donation', show_donator_donation_path(d)

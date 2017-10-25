@@ -1,5 +1,5 @@
 class SharesController < ApplicationController
-
+  before_action :require_login
   def edit
     @donation = Donation.find(params[:donation_id])
     @share = @donation.shares.find(params[:id])
