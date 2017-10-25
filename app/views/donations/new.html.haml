@@ -3,6 +3,6 @@
   #{f.text_field :food}
   #{f.number_field :amount}
   #{f.text_field :unit}
-  #{f.text_field :expiry_date}
+  #{f.date_select :expiry_date}
   %li
     = f.submit "Spende einstellen", class: "btn btn-success"

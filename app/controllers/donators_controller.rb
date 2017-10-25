@@ -29,8 +29,8 @@ class DonatorsController < ApplicationController
     @donation = @donator.donations.new(donation_params)
 
     if @donator.save
-      @donator.donations.last.donation_mail(@donator)
-      DonationMailer.donation_email_donator(@donator, @donator.donations.last).deliver_now
+      @donation.donation_mail(@donator)
+      DonationMailer.donation_email_donator(@donator, @donation).deliver_now
       flash[:success] = 'Spende eingestellt!'
       redirect_to donator_donations_path(@donator)
 

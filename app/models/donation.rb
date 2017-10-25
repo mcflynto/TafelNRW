@@ -4,7 +4,7 @@ class Donation < ApplicationRecord
   has_many :organizations, through: :shares
   has_many :shares
 
-  validates_presence_of :food, :amount, :unit
+  validates_presence_of :food, :amount, :unit, :expiry_date
   validates :amount,  numericality: { greater_than: 0 }
 
   def donation_mail(donator)
