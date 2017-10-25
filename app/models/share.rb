@@ -2,14 +2,15 @@ class Share < ApplicationRecord
   belongs_to :organization
   belongs_to :donation
   validate :amount_validation?
-  validate :pickup?
+  validate :pickup?,  on: :update
 
   def amount_validation?
     d = self.donation
     if(self.amount > d.amount)
       errors.add(:amount, "cannot be higher then total amount")
     end
-    if d.shares.sum(:amount) + self.amount > d.amount
+    amounts_without_me = d.shares.where.not(id: self.id).sum(:amount)
+    if amounts_without_me + self.amount > d.amount
       errors.add(:amount, "cannot be higher then total amount")
     end
     if self.amount <= 0
@@ -18,9 +19,11 @@ class Share < ApplicationRecord
   end
 
   def pickup?
-    d = self.donation
-    if(self.pick_up_date > d.expiry_date)
-      errors.add(:pick_up_date, "You cannot pick it up after the donation is expired")
+    if self.pick_up
+      d = self.donation
+      if(self.pick_up_date > d.expiry_date)
+        errors.add(:pick_up_date, "You cannot pick it up after the donation is expriered")
+      end
     end
   end
 

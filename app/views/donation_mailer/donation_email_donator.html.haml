@@ -1,13 +1,10 @@
-Hallo Spender
-= @donator.name
-
-Danke für folgende Spende
-
-Essen:
-= @donation.food
-Menge:
-= @donation.amount
-= @donation.unit
-
-Zur Spende gehen:
+Hallo #{@donator.name},
+%br/
+Danke für folgende Spende:
+%br/
+%br/
+Essen: #{@donation.food}
+%br/
+Menge: #{@donation.amount} #{@donation.unit}
+%br/
 = link_to "Zur Spende", @url

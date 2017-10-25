@@ -1,9 +1,29 @@
-Hallo #{@organization.name}
+Hallo #{@organization.name},
 %br/
 #{@transporter.name} hat den Transport folgender Spende am #{@donation.delivery_date} bestätigt:
 %br/
-= @donation.food
-= @donation.amount
-= @donation.unit
+%br/
+#{@donation.food}
+%br/
+#{@donation.amount}
+%br/
+#{@donation.unit}
+%br/
 %br/
 Vielen Dank!
+%br/
+%br/
+Hier sind die Informationen zu dem Transporter
+%br/
+%br/
+Spender: #{@transporter.name}
+%br/
+Email: #{@transporter.email}
+%br/
+Adresse
+%br/
+#{@transporter.address.street} #{@transporter.address.house_number}
+%br/
+#{@transporter.address.city}
+%br/
+#{@transporter.address.phone}
