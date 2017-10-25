@@ -3,4 +3,6 @@ class Organization < ApplicationRecord
   accepts_nested_attributes_for :address
   has_many :donations, through: :shares
   has_many :users
+
+  validates_presence_of :name, :email
 end

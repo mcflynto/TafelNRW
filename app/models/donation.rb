@@ -4,6 +4,9 @@ class Donation < ApplicationRecord
   has_many :organizations, through: :shares
   has_many :shares
 
+  validates_presence_of :food, :amount, :unit
+  validates :amount,  numericality: { greater_than: 0 }
+
   def donation_mail(donator)
     @organization = Organization.all
     @organization.each do |t|
