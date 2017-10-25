@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   resources :organizations
   resources :transporters
   resources :donators do
-    resources :donations, only: %i[index show new create]
+    resources :donations, only: %i[index show new create edit update]
   end
   resources :users do
     member do
@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     get  'transport',         on: :member
     post 'confirm_transport', on: :member
     get 'show_donator', on: :member
+    patch 'update_transport', on: :member
 
   end
 end

@@ -1,0 +1,9 @@
+%h1 Hier kannst du deine Spende bearbeiten
+
+= bootstrap_form_for [@donator, @donation] do |f|
+  #{f.text_field :food}
+  #{f.number_field :amount}
+  #{f.text_field :unit}
+  #{f.text_field :expiry_date}
+  %li
+    = f.submit "Spende bearbeiten", class: "btn btn-success"

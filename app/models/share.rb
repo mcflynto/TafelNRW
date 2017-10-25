@@ -22,8 +22,6 @@ class Share < ApplicationRecord
     if(self.pick_up_date > d.expiry_date)
       errors.add(:pick_up_date, "You cannot pick it up after the donation is expriered")
     end
-    debugger
-    puts('foo')
   end
 
 end

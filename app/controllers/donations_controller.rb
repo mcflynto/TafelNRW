@@ -11,6 +11,22 @@ class DonationsController < ApplicationController
     @donation = @donator.donations.new
   end
 
+  def edit
+    @donator = Donator.find(params[:donator_id])
+    @donation = @donator.donations.find(params[:id])
+  end
+
+  def update
+    @donator = Donator.find(params[:donator_id])
+    @donation = @donator.donations.find(params[:id])
+
+    if @donation.update(donation_params)
+      redirect_to donator_donations_path(@donator)
+    else
+      render :edit
+    end
+  end
+
   def create
     @donator = Donator.find(params[:donator_id])
     @donation = @donator.donations.new(donation_params)
@@ -21,7 +37,7 @@ class DonationsController < ApplicationController
     end
   end
 
-  def update
+  def update_transport
     @donation = Donation.find(params[:id])
     if @donation.update(transporter_donation_params)
       redirect_to transport_donation_path(@donation)
@@ -83,7 +99,7 @@ class DonationsController < ApplicationController
   private
 
   def donation_params
-    params.require(:donation).permit(:food, :amount, :unit, :expiry_date)
+    params.require(:donation).permit(:food, :amount, :unit, :expiry_date , :delivery_date)
   end
 
   def transporter_donation_params

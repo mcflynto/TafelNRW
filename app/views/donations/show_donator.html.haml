@@ -1,5 +1,6 @@
 .container-fluid
   %h1 Spende
+  = link_to "Spende bearbeiten", edit_donator_donation_path(@donation)
   Der Spender
   = @donator.name
   hat folgendes gespendet
