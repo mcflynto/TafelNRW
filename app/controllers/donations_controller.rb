@@ -12,16 +12,16 @@ class DonationsController < ApplicationController
   end
 
   def edit
-    @donator = Donator.find(params[:donator_id])
-    @donation = @donator.donations.find(params[:id])
+    @donation = Donation.find(params[:id])
+    @donator = @donation.donator
   end
 
   def update
-    @donator = Donator.find(params[:donator_id])
-    @donation = @donator.donations.find(params[:id])
+    @donation = Donation.find(params[:id])
+    @donator = @donation.donator
 
     if @donation.update(donation_params)
-      redirect_to donator_donations_path(@donator)
+      redirect_back(fallback_location: donator_donations_path(@donator))
     else
       render :edit
     end
