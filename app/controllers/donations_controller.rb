@@ -63,11 +63,12 @@ class DonationsController < ApplicationController
   def delivery
     @donation = Donation.find(params[:id])
     @donator = @donation.donator
-    @transporter = Transporter.all
-    @transporter.each do |trans|
-      TransporterMailer.transporter_email(@donation, @donator,
-                                          trans).deliver_later
+    @transporters = Transporter.all
+
+    @transporters.each do |trans|
+      TransporterMailer.transporter_email(@donation, @donator, trans).deliver_later
     end
+
     redirect_to donation_path(@donation)
   end
 
@@ -75,15 +76,22 @@ class DonationsController < ApplicationController
     @donation = Donation.find(params[:id])
     @donator = @donation.donator
     @shares = @donation.shares
+    set_transporter_token
+    find_transporter
+    unless transporter_authenticated?
+      redirect_to root_path
+    end
   end
 
   def confirm_transport
     @donation = Donation.find(params[:id])
     @donator = @donation.donator
     @shares = @donation.shares
-    # TODO: find the right transporter by email link
-    @transporter = Transporter.find(1)
+    set_transporter_token
+    find_transporter
+
     @donation.transporter = @transporter
+    @donation.save
 
     TransporterMailer.transport_confirmed_mail(@donation).deliver_later
     DonatorMailer.transport_confirmed_mail(@donation).deliver_later
@@ -93,7 +101,7 @@ class DonationsController < ApplicationController
 
     # TODO: put back in after testing:
     # @donation.update(confirmed: true)
-    redirect_to transport_donation_path(@donation)
+    redirect_to transport_donation_path(@donation, transporter_hash: @transporter.transporter_hash)
   end
 
   private
@@ -104,5 +112,24 @@ class DonationsController < ApplicationController
 
   def transporter_donation_params
     params.require(:donation).permit(:delivery_date)
+  end
+
+  def set_transporter_token
+    if params[:transporter_hash].present?
+      @transporter_token = params.fetch(:transporter_hash, nil)
+      session[:transporter_hash] = @transporter_token
+    else
+      @transporter_token = session.fetch(:transporter_hash, nil)
+    end
+  end
+
+  helper_method :transporter_authenticated?
+  def transporter_authenticated?
+    @transporter.present? && @transporter_token.present?
+  end
+
+  helper_method :find_transporter
+  def find_transporter
+    @transporter ||= Transporter.find_by_transporter_hash(@transporter_token)
   end
 end

@@ -15,6 +15,7 @@ class TransportersController < ApplicationController
 
   def create
     @transporter = Transporter.new(transporter_params)
+    @transporter.create_transporter_hash
     if @transporter.save
       flash[:notice] = 'Transporter wurde hinzugefügt'
       redirect_to users_path
