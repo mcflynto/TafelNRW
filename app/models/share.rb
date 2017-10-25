@@ -2,6 +2,7 @@ class Share < ApplicationRecord
   belongs_to :organization
   belongs_to :donation
   validate :amount_validation?
+  validate :pickup?
 
   def amount_validation?
     d = self.donation
@@ -14,6 +15,15 @@ class Share < ApplicationRecord
     if self.amount <= 0
       errors.add(:amount, "cannot be 0")
     end
+  end
+
+  def pickup?
+    d = self.donation
+    if(self.pick_up_date > d.expiry_date)
+      errors.add(:pick_up_date, "You cannot pick it up after the donation is expriered")
+    end
+    debugger
+    puts('foo')
   end
 
 end

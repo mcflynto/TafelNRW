@@ -34,9 +34,9 @@ ActiveRecord::Schema.define(version: 20171024114809) do
     t.string "food"
     t.integer "amount"
     t.string "unit"
-    t.string "expiry_date"
+    t.date "expiry_date"
     t.boolean "ordered"
-    t.string "delivery_date"
+    t.date "delivery_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "confirmed"
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 20171024114809) do
     t.bigint "organization_id"
     t.integer "amount"
     t.boolean "pick_up"
-    t.string "pick_up_date"
+    t.date "pick_up_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["donation_id"], name: "index_shares_on_donation_id"

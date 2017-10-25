@@ -19,6 +19,6 @@ Waren sie bereits früher schon einmal spender?
         #{d.text_field :food}
         #{d.number_field :amount}
         #{d.text_field :unit}
-        #{d.text_field :expiry_date}
+        #{d.date_select :expiry_date}
       %li
         = f.submit "Spende einstellen", class: "btn btn-success"
