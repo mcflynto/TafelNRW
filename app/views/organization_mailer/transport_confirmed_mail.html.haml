@@ -1,0 +1,9 @@
+Hallo #{@organization.name}
+%br/
+#{@transporter.name} hat den Transport folgender Spende am #{@donation.delivery_date} bestätigt:
+%br/
+= @donation.food
+= @donation.amount
+= @donation.unit
+%br/
+Vielen Dank!

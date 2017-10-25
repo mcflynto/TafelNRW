@@ -1,0 +1,23 @@
+Hallo #{@donator.name}
+%br/
+#{@transporter.name} hat den Transport folgender Spende am #{@donation.delivery_date} bestätigt:
+%br/
+= @donation.food
+= @donation.amount
+= @donation.unit
+%br/
+Die Spende wird an folgende Organisationen geliefert:
+- @shares.each do |s|
+  = s.organization.name
+  %br/
+  = s.organization.address.street
+  %br/
+  = s.organization.address.house_number
+  %br/
+  = s.organization.address.city
+  %br/
+  = s.organization.address.plz
+  %br/
+
+%br/
+Vielen Dank!
