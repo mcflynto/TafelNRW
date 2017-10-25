@@ -1,14 +1,19 @@
 FactoryGirl.define do
   factory :user do
     name "Philipp"
-    email "pdoll@byom.de"
+    email "philippd@byom.de"
     password "test"
     admin true
   end
 
-  factory :tafel do
+  factory :organization do
     name "Essen"
-    email "tafel@essen.de"
+    email "tafelessenB@byom.de"
+    factory :organization_with_share do
+      after(:create) do |organization|
+        create(:share, organization: organization)
+      end
+    end
   end
 
 
@@ -19,7 +24,7 @@ FactoryGirl.define do
     city "Essen"
     plz "45139"
     phone "717465"
-    trait :tafel_address do
+    trait :organization_address do
       addressable_type "Tafel"
     end
     trait :donator_address do
@@ -32,21 +37,32 @@ FactoryGirl.define do
 
   factory :transporter do
     name "Von A nach B"
-    email "vonanachb@transport.com"
+    email "transporterB@byom.de"
   end
 
   factory :donator do
     name "EdlerSpender"
-    email "edlerspender@spender.com"
+    email "edlerspenderB@byom.de"
   end
 
   factory :donation do
     food "Bananen"
     amount 10
     unit "kg"
-    expiry_date "Time.zone.now"
+    expiry_date "2017-10-30"
     ordered false
-    delivery_date "Time.zone.now"
+    delivery_date "2017-10-25"
+    factory :donation_with_share do
+      after(:create) do |donation|
+        create(:share, donation: donation)
+      end
+    end
+  end
+
+  factory :share do
+    amount 6
+    pick_up true
+    pick_up_date "2017-10-28"
   end
 
 end
