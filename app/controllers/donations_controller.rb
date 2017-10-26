@@ -81,6 +81,7 @@ class DonationsController < ApplicationController
     @shares = @donation.shares
     set_transporter_token
     find_transporter
+
     unless transporter_authenticated?
       redirect_to root_path
     end
@@ -93,6 +94,7 @@ class DonationsController < ApplicationController
     set_transporter_token
     find_transporter
 
+    @donation.update(donation_params)
     @donation.transporter = @transporter
     @donation.save
 
