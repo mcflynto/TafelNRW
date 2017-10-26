@@ -15,13 +15,8 @@ Rails.application.routes.draw do
 
   post 'verification' => 'donators#verification', :as => 'verification'
 
-<<<<<<< HEAD
   get 'ordered' => 'donators#ordered', :as => 'ordered'
 
-
-
-=======
->>>>>>> buttons
   root to: 'static_pages#home'
 
   resources :organizations
@@ -48,7 +43,5 @@ Rails.application.routes.draw do
     get 'show_donator', on: :member
     patch 'update_transport', on: :member
     get 'thank_you', on: :member
-
-
   end
 end
