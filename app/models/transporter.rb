@@ -5,6 +5,7 @@ class Transporter < ApplicationRecord
   accepts_nested_attributes_for :address
 
   validates_presence_of :name, :email
+  validates :email, uniqueness: true
 
   def create_transporter_hash
     self.transporter_hash = loop do

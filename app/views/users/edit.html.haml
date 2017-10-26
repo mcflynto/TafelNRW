@@ -3,7 +3,7 @@
 - if current_user.is_admin?
   = form_for @user do |f|
     = f.label :name
-    = f.text_field :name
+    = f.text_field :name, :maxlength => 25
     = f.label :email
     = f.email_field :email
     = f.label :admin
@@ -13,7 +13,7 @@
 - else
   = form_for @user do |f|
     = f.label :name
-    = f.text_field :name
+    = f.text_field :name, :maxlength => 25
     = f.label :email
     = f.email_field :email
     = f.label :password

@@ -5,4 +5,5 @@ class Organization < ApplicationRecord
   has_many :users
 
   validates_presence_of :name, :email
+  validates :email, uniqueness: true
 end
