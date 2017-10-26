@@ -1,0 +1,11 @@
+%h1 Danke für deine Spende
+
+Deine Spende ist folgende:
+= @donation.food
+Menge:
+= @donation.amount
+= @donation.unit
+Ende der Spende
+= @donation.expiry_date
+
+= link_to "Zu meinen Spenden", donator_donations_path(@donator)

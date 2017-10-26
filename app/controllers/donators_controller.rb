@@ -21,6 +21,10 @@ class DonatorsController < ApplicationController
     @donator = Donator.new
   end
 
+  def ordered
+    @donator = Donator.all
+  end
+
   def verification
     @donator = Donator.where(email: donator_params[:email]).first
 
@@ -32,6 +36,11 @@ class DonatorsController < ApplicationController
     end
   end
 
+  def thank_you
+    @donator = Donator.find(params[:id])
+    @donation = @donator.donations.last
+  end
+
   def create
     @donator = Donator.new(donator_params)
     @donation = @donator.donations.new(donation_params)
@@ -40,7 +49,7 @@ class DonatorsController < ApplicationController
       @donation.donation_mail(@donator)
       DonationMailer.donation_email_donator(@donator, @donation).deliver_now
       flash[:success] = 'Spende eingestellt!'
-      redirect_to donator_donations_path(@donator)
+      redirect_to thank_you_donator_path(@donator)
 
     else
       flash[:error] = 'Es ist ein Fehler aufgetreteten'

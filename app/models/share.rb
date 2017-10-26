@@ -2,7 +2,7 @@ class Share < ApplicationRecord
   belongs_to :organization
   belongs_to :donation
   validate :amount_validation?
-  validate :pickup?,  on: :update
+  validate :pickup?,  on: :pickup
 
   def amount_validation?
     d = self.donation

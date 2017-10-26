@@ -33,7 +33,7 @@ class DonationsController < ApplicationController
     if @donation.save
       @donation.donation_mail(@donator)
       DonationMailer.donation_email_donator(@donator, @donation).deliver_now
-      redirect_to donator_donations_path(@donator)
+      redirect_to thank_you_donator_path(@donator)
 
     else
       render :new
@@ -72,7 +72,12 @@ class DonationsController < ApplicationController
       TransporterMailer.transporter_email(@donation, @donator, trans).deliver_later
     end
 
-    redirect_to donation_path(@donation)
+    redirect_to thank_you_donation_path(@donation)
+  end
+
+  def thank_you
+    @donation = Donation.find(params[:id])
+    @shares = @donation.shares.all
   end
 
   def transport

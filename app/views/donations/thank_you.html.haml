@@ -1,0 +1,20 @@
+%h1 Die Spende wurde bestellt
+
+Es wurde Folgendes Bestellt:
+
+%table
+  %thead
+    %tr
+      %th Tafel
+      %th Menge
+      %th Einheit
+      %th Selbstabholung
+  %tbody
+    - @shares.each do |s|
+      %tr
+        %td= s.organization.name
+        %td= s.amount
+        %td= @donation.unit
+        %td= s.pick_up
+
+= link_to "Zurück zu deinen Spenden", donators_path

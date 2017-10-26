@@ -13,6 +13,9 @@ Rails.application.routes.draw do
 
   post 'verification' => 'donators#verification', :as => 'verification'
 
+  get 'ordered' => 'donators#ordered', :as => 'ordered'
+
+
 
   root to: 'static_pages#home'
 
@@ -20,6 +23,7 @@ Rails.application.routes.draw do
   resources :transporters
   resources :donators do
     resources :donations, only: %i[index show new create edit update]
+    get 'thank_you', on: :member
   end
   resources :users do
     member do
@@ -31,12 +35,15 @@ Rails.application.routes.draw do
   resources :donations do
     resources :shares do
       patch 'pickup', on: :member
+      get 'thank_you', on: :member
     end
     post 'delivery',          on: :member
     get  'transport',         on: :member
     post 'confirm_transport', on: :member
     get 'show_donator', on: :member
     patch 'update_transport', on: :member
+    get 'thank_you', on: :member
+
 
   end
 end

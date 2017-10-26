@@ -42,10 +42,15 @@ class SharesController < ApplicationController
     if @share.update(share_params)
       flash[:notice] = "Selbstabholung spende ist Angefragt"
       DonatorMailer.pickup_email(@donation, @organization, @donator, @share).deliver_now
-      redirect_to donators_path
+      render :thank_you
 
     else
       render :edit
+    end
+
+    def thank_you
+      @donation = Donation.find(params[:donation_id])
+      @share = @donation.shares.find(params[:id])
     end
 
   end
