@@ -67,7 +67,7 @@ class DonationsController < ApplicationController
     @donation = Donation.find(params[:id])
     @donator = @donation.donator
     @transporters = Transporter.all
-
+    @donation.update(ordered: true)
     @transporters.each do |trans|
       TransporterMailer.transporter_email(@donation, @donator, trans).deliver_later
     end
@@ -102,8 +102,7 @@ class DonationsController < ApplicationController
       OrganizationMailer.transport_confirmed_mail(@donation, share).deliver_later
     end
 
-    # TODO: put back in after testing:
-    # @donation.update(confirmed: true)
+    @donation.update(confirmed: true)
     redirect_to transport_donation_path(@donation, transporter_hash: @transporter.transporter_hash)
   end
 

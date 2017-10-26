@@ -26,27 +26,36 @@
   = @donation.unit
   Verbleibende Menge:
   = @donation.amount - @donation.shares.sum(:amount)
-
-  - if current_user.present? && @share_organization == nil
-    = form_for [@donation, @share] do |f|
-      = f.label :amount
-      = f.number_field :amount
-      = f.label :pick_up
-      = f.check_box :pick_up
-      = f.submit 'Vormerken'
-  - else
-    = form_for [@donation, @share_organization] do |f|
-      = f.label :amount
-      = f.number_field :amount
-      = f.label :pick_up
-      = f.check_box :pick_up
-      = f.submit 'bearbeiten'
-
-  - if @share_organization != nil
-    - if current_user.present? && current_user.admin? && @share_organization.pick_up == false
-      =button_to 'Anfordern', delivery_donation_path, data: { confirm: 'Sicher?' }, class: 'btn btn-danger'
+  Die Spende endet am
+  = @donation.expiry_date
+  %br/
+  - if @donation.ordered
+    %b
+      Die Spende wurde bereits von Angefordert es können keine weitern Einträge erstellt werden
+  -else
+    - if current_user.present? && @share_organization == nil
+      = form_for [@donation, @share] do |f|
+        = f.label :amount
+        = f.number_field :amount
+        = f.label :pick_up
+        = f.check_box :pick_up
+        = f.submit 'Vormerken'
+    - elsif @share_organization.pick_up_date == nil
+      = form_for [@donation, @share_organization] do |f|
+        = f.label :amount
+        = f.number_field :amount
+        = f.label :pick_up
+        = f.check_box :pick_up
+        = f.submit 'bearbeiten'
     - else
-      =link_to 'Selbstabholen', edit_donation_share_path(@donation, @share_organization), data: { confirm: 'Sicher?' }, class: 'btn btn-info'
+      %b
+        Deine Tafel hat bereits eine Selbstabholung angefordert.
+
+    - if @share_organization != nil
+      - if current_user.present? && current_user.admin? && @share_organization.pick_up == false
+        =button_to 'Anfordern', delivery_donation_path, data: { confirm: 'Sicher?' }, class: 'btn btn-danger'
+      - elsif @share_organization.pick_up_date == nil
+        =link_to 'Selbstabholen', edit_donation_share_path(@donation, @share_organization), data: { confirm: 'Sicher?' }, class: 'btn btn-info'
   %table
     %thead
       %tr
