@@ -1,0 +1,10 @@
+%h1 Selbstabholung
+
+Bitte gebe ein Datum für die Selbstabholung an
+
+= bootstrap_form_for [@donation, @share], url: pickup_donation_share_path do |f|
+  = f.number_field :amount
+  = f.date_select :pick_up_date
+  = f.submit "Selbstabholung einreichen"
+
+= link_to "Back", donation_path(@donation)

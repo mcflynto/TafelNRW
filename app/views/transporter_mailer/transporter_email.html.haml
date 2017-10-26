@@ -1,0 +1,53 @@
+Transportunternehmer!
+#{@transporter.name}
+%br/
+Es wurde ein Transport für eine Spende an folgende Tafeln angefordert:
+%br/
+%br/
+- @shares.each do |o|
+  = o.organization.name
+  %br/
+  = o.organization.address.street
+  %br/
+  = o.organization.address.house_number
+  %br/
+  = o.organization.address.city
+  %br/
+  = o.organization.address.plz
+  %br/
+%br/
+
+Bei der Spende handelt es sich um:
+%br/
+Die Spende beinhaltet:
+%table
+  %thead
+    %tr
+      %th Tafel
+      %th Menge
+      %th Einheit
+  %tbody
+    - @shares.each do |s|
+      %tr
+        %td= s.organization.name
+        %td= s.amount
+        %td= @donation.unit
+
+von: #{@donator.name}
+%br/
+Email: #{@donator.email}
+%br/
+Adresse
+%br/
+#{@donator.address.street} #{@donator.address.house_number}
+%br/
+#{@donator.address.city}
+%br/
+#{@donator.address.phone}
+%br/
+Die Spende muss an folgende Organisationen geliefert werden:
+%br/
+%br/
+
+Zur Spende gehen:
+= link_to "Zur Spende", @url

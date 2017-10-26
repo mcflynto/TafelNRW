@@ -1,0 +1,31 @@
+Hallo #{@donator.name},
+%br/
+Die Tafel #{@organization.name}
+holt die Bestellung selsbt ab.
+%br/
+Die Tafel wird folgendes selbst abholen.
+%br/
+%br/
+Essen: #{@donation.food}
+%br/
+Menge: #{@share.amount} #{@donation.unit}
+%br/
+Es wird am
+#{@share.pick_up_date}
+abgeholt
+%br/
+%br/
+Hier findest du den Kontakt der Tafel.
+%br/
+%br/
+Tafel: #{@organization.name}
+%br/
+Email: #{@organization.email}
+%br/
+Adresse
+%br/
+#{@organization.address.street} #{@organization.address.house_number}
+%br/
+#{@organization.address.city}
+%br/
+#{@organization.address.phone}

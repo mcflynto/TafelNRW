@@ -1,0 +1,15 @@
+.donations-overview
+  %h1 Übersicht Donations
+  %p Hello #{@donator.name}
+  %p Donations:
+  %ul
+  = link_to "Neue Donation erstellen", new_donator_donation_path
+  - @donations.each do |d|
+    %p Donation #{d.id}
+    %li= d.food
+    %li= d.amount
+    %li= d.unit
+    - if current_user
+      %li= link_to 'single donation', donation_path(d)
+    - else
+      %li= link_to 'single donation', show_donator_donation_path(d)

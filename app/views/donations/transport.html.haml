@@ -1,0 +1,45 @@
+.container-fluid
+  %h1 Zusammenfassung Transport
+  Spende:
+  %br/
+  = @donation.food
+  = @donation.amount
+  = @donation.unit
+  %br/
+  Organisationen die beliefert werden müssen:
+  %br/
+  - @shares.each do |s|
+    .orga-list
+      Organisations-Name ->
+      = s.organization.name
+      %br/
+      Organisations-Adresse ->
+      %ul
+        %li Straße: #{s.organization.address.street}
+        %li Hausnummer: #{s.organization.address.house_number}
+        %li Stadt: #{s.organization.address.city}
+        %li Postleitzahl: #{s.organization.address.plz}
+      Teilmenge ->
+      = s.amount
+      = @donation.unit
+  .deliverydate-form
+    = bootstrap_form_for @donation, url: confirm_transport_donation_path do |f|
+      = f.date_select :delivery_date
+      - if @donation.confirmed?
+        .btn.btn-success Transport bestätigt!
+      - else
+        %button.btn.btn-info{"data-target" => "#confirmation-modal", "data-toggle" => "modal", :type => "button"} Transport bestätigen
+      / Modal
+      #confirmation-modal.modal.fade{:role => "dialog"}
+        .modal-dialog
+          / Modal content
+          .modal-content
+            .modal-header
+              %button.close{"data-dismiss" => "modal", :type => "button"} ×
+              %h4.modal-title Bestätigung
+            .modal-body
+              %p Sind Sie sicher, dass Sie den Transport bestätigen möchten?
+            .modal-footer
+              %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Abbrechen
+              = f.submit 'Transport bestätigen', class: 'btn btn-info'
+

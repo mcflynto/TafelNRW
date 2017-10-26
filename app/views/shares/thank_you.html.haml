@@ -1,0 +1,10 @@
+%h1 Danke das du deine Spende selbst abholst
+
+Du holst folgendes selbst ab:
+Essen:
+= @donation.food
+Menge:
+= @share.amount
+= @donation.unit
+
+= link_to "Zurück zu den Spenden", donators_path

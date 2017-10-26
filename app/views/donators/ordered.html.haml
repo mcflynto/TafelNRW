@@ -1,0 +1,12 @@
+.container-fluid.donations
+  %h1 Bestellte Donation
+  %ul
+  - @donator.each do |donator|
+    %li #{donator.name}
+    - donator.ordered_donation.each do |donations|
+      #{donations.food}
+      #{donations.amount}
+      #{donations.unit}
+      = link_to 'zur Spende', donation_path(donations)
+
+= link_to "Back", donators_path

@@ -1,0 +1,15 @@
+|
+= link_to 'Userliste', users_path
+
+.container-fluid.donations
+  %h1 Spendenübersicht
+  %ul
+  - @donator.each do |donator|
+    %li #{donator.name}
+    - donator.open_donation.each do |donations|
+      #{donations.food}
+      #{donations.amount}
+      #{donations.unit}
+      = link_to 'zur Spende', donation_path(donations)
+
+= link_to "Bestellte Spenden", ordered_path

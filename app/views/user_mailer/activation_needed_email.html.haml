@@ -1,0 +1,36 @@
+Hallo #{@user.name},
+%br/
+es wurde für sie ein Account bei der Tafel #{@organization.name} angelegt.
+%br/
+Ihr Daten sind folgende:
+%br/
+%br/
+Accountname: #{@user.name}
+%br/
+EMail: #{@user.email}
+%br/
+- if @user.is_admin?
+  %br/
+  Du wurdest als Admin angelegt
+  %br/
+- else
+  %br/
+  Du wurdest als normaler Mitarbeiter erstellt
+  %br/
+Um deinen Account freizuschalten, musst du ein Passwort festlegen.
+= link_to "Passwort festlegen", @url
+%br/
+Hier findest du den Kontakt der Tafel.
+%br/
+%br/
+Tafel: #{@organization.name}
+%br/
+Email: #{@organization.email}
+%br/
+Adresse
+%br/
+#{@organization.address.street} #{@organization.address.house_number}
+%br/
+#{@organization.address.city}
+%br/
+#{@organization.address.phone}

@@ -1,0 +1,24 @@
+.donator-header
+  %h1 Spender
+Waren sie bereits früher schon einmal spender?
+= link_to "Dann hier Klicken", login_url
+.donator-form
+  = bootstrap_form_for @donator do |f|
+    %ul
+      %li
+        = f.text_field :name
+      %li
+        = f.text_field :email
+      = f.fields_for :address_attributes, @address do |a|
+        #{a.text_field :street}
+        #{a.text_field :house_number}
+        #{a.text_field :city}
+        #{a.text_field :plz}
+        #{a.text_field :phone}
+      = f.fields_for :donations_attributes, @donation do |d|
+        #{d.text_field :food}
+        #{d.number_field :amount}
+        #{d.text_field :unit}
+        #{d.date_select :expiry_date}
+      %li
+        = f.submit "Spende einstellen", class: "btn btn-success"

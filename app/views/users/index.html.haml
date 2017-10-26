@@ -1,0 +1,23 @@
+%h1 Alle Mitarbeiter deiner Organisation
+- if current_user.is_admin?
+  = link_to "Neuen Mitarbeiter erstellen", new_user_path
+  = link_to "Neues Transportunternehmen hinzufügen", new_transporter_path
+  = link_to "Neue Organisation erstellen", new_organization_path
+  = link_to "Alle Organisationen anzeigen", organizations_path
+  = link_to "Alle Transportunternehmen", transporters_path
+- @user.each do |u|
+  - if current_user.is_admin?
+    %h3 Name:
+    = u.name
+    %h3 Email:
+    = u.email
+    %br/
+    = link_to "Mitarbeiter bearbeiten", edit_user_path(u)
+
+  - else
+    %h3 Name:
+    = u.name
+    %h3 Email:
+    = u.email
+
+= link_to "Zu den Spenden", donators_path
