@@ -31,7 +31,7 @@
   %br/
   - if @donation.ordered
     %b
-      Die Spende wurde bereits von Angefordert es können keine weitern Einträge erstellt werden
+      Die Spende wurde bereits angefordert, es können keine weiteren Einträge erstellt werden.
   -else
     - if current_user.present? && @share_organization == nil
       = form_for [@donation, @share] do |f|
