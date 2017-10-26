@@ -6,3 +6,5 @@ Bitte gebe ein Datum für die Selbstabholung an
   = f.number_field :amount
   = f.date_select :pick_up_date
   = f.submit "Selbstabholung einreichen"
+
+= link_to "Back", donation_path(@donation)

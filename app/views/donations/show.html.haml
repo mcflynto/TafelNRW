@@ -1,8 +1,24 @@
 .container-fluid
   %h1 Spende
-  Der Spender
+
+  %br/
+  Spender:
   = @donator.name
+  %br/
+  Email:
+  = @donator.email
+  %br/
+  Adresse
+  %br/
+  = @donator.address.street
+  = @donator.address.house_number
+  %br/
+  = @donator.address.city
+  %br/
+  = @donator.address.phone
+  %br/
   hat folgendes gespendet
+
   Essen:
   = @donation.food
   Menge:
@@ -48,4 +64,4 @@
 
 
 
-  = link_to 'Back', :back
+  = link_to 'Back', donators_path

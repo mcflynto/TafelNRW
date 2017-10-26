@@ -7,3 +7,5 @@
   #{f.text_field :expiry_date}
   %li
     = f.submit "Spende bearbeiten", class: "btn btn-success"
+
+= link_to "Back" , show_donator_donation_path(@donation)
