@@ -53,9 +53,10 @@
 
     - if @share_organization != nil
       - if current_user.present? && current_user.admin? && @share_organization.pick_up == false
-        =button_to 'Anfordern', delivery_donation_path, class: 'btn btn-danger'
+        %button.btn.btn-info{"data-target" => "#transport-confirmation-modal", "data-toggle" => "modal", :type => "button"} Transport anfordern
       - elsif @share_organization.pick_up_date == nil
-        =link_to 'Selbstabholen', edit_donation_share_path(@donation, @share_organization), class: 'btn btn-info'
+        %button.btn.btn-info{"data-target" => "#pickup-confirmation-modal", "data-toggle" => "modal", :type => "button"} Selbstabholung
+
   %table
     %thead
       %tr
@@ -71,6 +72,32 @@
           %td= @donation.unit
           %td= s.pick_up
 
-
-
   = link_to 'Back', donators_path
+
+  / Transport Modal
+  #transport-confirmation-modal.modal.fade{:role => "dialog"}
+    .modal-dialog
+      / Modal content
+      .modal-content
+        .modal-header
+          %button.close{"data-dismiss" => "modal", :type => "button"} ×
+          %h4.modal-title Bestätigung
+        .modal-body
+          %p Sind Sie sicher, dass Sie den Transport anfordern möchten?
+        .modal-footer
+          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Abbrechen
+          = button_to 'Anfordern', delivery_donation_path, class: 'btn btn-danger'
+
+  / Pickup Modal
+  #pickup-confirmation-modal.modal.fade{:role => "dialog"}
+    .modal-dialog
+      / Modal content
+      .modal-content
+        .modal-header
+          %button.close{"data-dismiss" => "modal", :type => "button"} ×
+          %h4.modal-title Bestätigung
+        .modal-body
+          %p Sind Sie sicher, dass Sie die Spende selbst abholen möchten?
+        .modal-footer
+          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Abbrechen
+          = link_to 'Selbstabholen', edit_donation_share_path(@donation, @share_organization), class: 'btn btn-info'
