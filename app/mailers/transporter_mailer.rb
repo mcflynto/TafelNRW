@@ -4,7 +4,7 @@ class TransporterMailer < ApplicationMailer
 
   def transporter_email(donation, donator, transporter)
     @donation = donation
-    @shares = @donation.shares
+    @shares = @donation.shares.where(pick_up: false)
     @donator = donator
     @transporter = transporter
     @url = transport_donation_url(@donation, transporter_hash: @transporter.transporter_hash)
@@ -16,7 +16,7 @@ class TransporterMailer < ApplicationMailer
     @donation = donation
     @donator = @donation.donator
     @transporter = @donation.transporter
-    @shares = @donation.shares
+    @shares = @donation.shares.where(pick_up: false)
 
     mail(to: @transporter.email, subject: 'Transport bestätigt')
   end

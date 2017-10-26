@@ -20,12 +20,18 @@ Es wurde ein Transport für eine Spende an folgende Tafeln angefordert:
 Bei der Spende handelt es sich um:
 %br/
 Die Spende beinhaltet:
-%br/
-%br/
-Essen: #{@donation.food}
-%br/
-Menge: #{@donation.amount} #{@donation.unit}
-%br/
+%table
+  %thead
+    %tr
+      %th Tafel
+      %th Menge
+      %th Einheit
+  %tbody
+    - @shares.each do |s|
+      %tr
+        %td= s.organization.name
+        %td= s.amount
+        %td= @donation.unit
 
 von: #{@donator.name}
 %br/

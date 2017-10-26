@@ -69,7 +69,7 @@ class DonationsController < ApplicationController
     @transporters = Transporter.all
     @donation.update(ordered: true)
     @transporters.each do |trans|
-      TransporterMailer.transporter_email(@donation, @donator, trans).deliver_later
+      TransporterMailer.transporter_email(@donation, @donator, trans).deliver_now
     end
 
     redirect_to thank_you_donation_path(@donation)
