@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   get 'login' => 'donators#login', :as => 'login'
 
+  get 'userlogin' => 'sessions#new', :as => 'userlogin'
+
   post 'verification' => 'donators#verification', :as => 'verification'
 
 
