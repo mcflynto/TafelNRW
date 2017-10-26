@@ -23,8 +23,8 @@
       = s.amount
       = @donation.unit
   .deliverydate-form
-    = bootstrap_form_for @donation do |f|
-      = f.text_field :delivery_date
+    = bootstrap_form_for @donation, url: update_transport_donation_path do |f|
+      = f.date_select :delivery_date
       = f.submit 'Lieferdatum einstellen', class: 'btn btn-info'
 
     - if @donation.confirmed?

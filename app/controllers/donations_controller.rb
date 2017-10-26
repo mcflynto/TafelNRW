@@ -21,7 +21,7 @@ class DonationsController < ApplicationController
     @donator = @donation.donator
 
     if @donation.update(donation_params)
-      redirect_back(fallback_location: donator_donations_path(@donator))
+      redirect_to donator_donations_path(@donator)
     else
       render :edit
     end
