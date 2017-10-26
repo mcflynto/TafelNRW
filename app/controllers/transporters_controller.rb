@@ -6,6 +6,7 @@ class TransportersController < ApplicationController
 
   def new
     @transporter = Transporter.new
+    @address = Address.new
   end
 
   def edit
@@ -16,6 +17,7 @@ class TransportersController < ApplicationController
   def create
     @transporter = Transporter.new(transporter_params)
     @transporter.create_transporter_hash
+    @address = Address.new(transporter_params[:address_attributes])
     if @transporter.save
       flash[:notice] = 'Transporter wurde hinzugefügt'
       redirect_to users_path

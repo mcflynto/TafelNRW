@@ -15,6 +15,7 @@ class DonatorsController < ApplicationController
   def new
     @donator = Donator.new
     @donation = @donator.donations.new
+    @address = Address.new
   end
 
   def login
@@ -44,6 +45,7 @@ class DonatorsController < ApplicationController
   def create
     @donator = Donator.new(donator_params)
     @donation = @donator.donations.new(donation_params)
+    @address = Address.new(donator_params[:address_attributes])
 
     if @donator.save
       @donation.donation_mail(@donator)

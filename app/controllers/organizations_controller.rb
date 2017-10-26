@@ -11,11 +11,12 @@ class OrganizationsController < ApplicationController
 
   def new
     @organization = Organization.new
+    @address = Address.new
   end
 
   def create
     @organization = Organization.new(organization_params)
-
+    @address = Address.new(organization_params[:address_attributes])
     if @organization.save
       flash[:notice] = "Neue Organisation wurde erstellt"
       redirect_to users_path
