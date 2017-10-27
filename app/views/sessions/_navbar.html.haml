@@ -1,9 +1,9 @@
-- if current_user.present? && params[:action] != 'transport'
+- if user_signed_in? && params[:action] != 'transport'
   %b Du bist eingeloggt als
   %em
   = link_to current_user.email, edit_user_path(current_user)
   |
-  = link_to "logout", logout_path , methode: 'DELETE'
+  = link_to "logout", destroy_user_session_path, method: :delete
   |
   = link_to "Home", root_path
   - if !current_page?(donators_path)

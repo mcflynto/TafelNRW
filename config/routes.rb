@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  devise_for :users, controllers: {
+    sessions: 'users/sessions'
+  }
+
   get 'password_resets/create'
 
   get 'password_resets/edit'
@@ -7,11 +11,7 @@ Rails.application.routes.draw do
 
   get 'users/alluser'
 
-  get 'logout' => 'sessions#destroy', :as => 'logout'
-
   get 'login' => 'donators#login', :as => 'login'
-
-  get 'userlogin' => 'sessions#new', :as => 'userlogin'
 
   post 'verification' => 'donators#verification', :as => 'verification'
 
@@ -32,7 +32,6 @@ Rails.application.routes.draw do
       get :organization_members
     end
   end
-  resources :sessions
   resources :donations do
     resources :shares do
       patch 'pickup', on: :member

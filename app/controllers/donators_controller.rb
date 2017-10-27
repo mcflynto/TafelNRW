@@ -1,7 +1,7 @@
 # Donators Controller
 class DonatorsController < ApplicationController
-  before_action :no_tafel_user, only:[:new, :login, :verification, :create]
-  before_action :require_login, only:[:index]
+  before_action :no_tafel_user, only: [:new, :login, :verification, :create]
+  before_action :authenticate_user!, only: :index
   def no_tafel_user
     if current_user
       redirect_to donators_path
