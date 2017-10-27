@@ -5,6 +5,7 @@
   = link_to "Neue Organisation erstellen", new_organization_path
   = link_to "Alle Organisationen anzeigen", organizations_path
   = link_to "Alle Transportunternehmen", transporters_path
+  = link_to "Meine Mitarbeiter", organization_members_user_path(current_user)
 - @user.each do |u|
   - if current_user.is_admin?
     %h3 Name:

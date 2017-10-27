@@ -1,0 +1,17 @@
+%h1 Meine Mitarbeiter
+- @user.each do |u|
+  - if current_user.is_admin?
+    %h3 Name:
+    = u.name
+    %h3 Email:
+    = u.email
+    %br/
+    = link_to "Mitarbeiter bearbeiten", edit_user_path(u)
+
+  - else
+    %h3 Name:
+    = u.name
+    %h3 Email:
+    = u.email
+%br/
+= link_to "Back", users_path

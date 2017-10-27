@@ -29,6 +29,7 @@ Rails.application.routes.draw do
     member do
       get :activate
       patch :confirm
+      get :organization_members
     end
   end
   resources :sessions
