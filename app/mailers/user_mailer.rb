@@ -12,11 +12,6 @@ class UserMailer < ApplicationMailer
   #   mail to: "to@example.org"
   # end
 
-  def welcome_mail(user)
-    @user = user
-    @organization = Organization.find(user.organization_id)
-    mail(to: user.email , subject: "Account organization")
-  end
 
   def activation_needed_email(user)
     @user = user

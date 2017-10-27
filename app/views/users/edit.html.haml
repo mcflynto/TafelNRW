@@ -2,8 +2,10 @@
 
 - if current_user.is_admin?
   = form_for @user do |f|
-    = f.label :name
-    = f.text_field :name, :maxlength => 25
+    = f.label :first_name
+    = f.text_field :first_name, :maxlength => 25
+    = f.label :last_name
+    = f.text_field :last_name, :maxlength => 25
     = f.label :email
     = f.email_field :email
     = f.label :admin
@@ -12,8 +14,10 @@
     = f.submit 'Bearbeiten'
 - else
   = form_for @user do |f|
-    = f.label :name
-    = f.text_field :name, :maxlength => 25
+    = f.label :first_name
+    = f.text_field :first_name, :maxlength => 25
+    = f.label :last_name
+    = f.text_field :last_name, :maxlength => 25
     = f.label :email
     = f.email_field :email
     = f.label :password

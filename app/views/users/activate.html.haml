@@ -1,7 +1,9 @@
 %h1 Passwort erstellen
 = form_for @user,  url: confirm_user_url(@user), :method => :PATCH do |f|
-  = f.label :name
-  = f.text_field :name
+  = f.label :first_name
+  = f.text_field :first_name, :maxlength => 25
+  = f.label :last_name
+  = f.text_field :last_name, :maxlength => 25
   = f.label :email
   = f.email_field :email
   = f.label :password
