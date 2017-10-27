@@ -32,7 +32,7 @@ class DonationsController < ApplicationController
     @donation = @donator.donations.new(donation_params)
     if @donation.save
       @donation.donation_mail(@donator)
-      DonationMailer.donation_email_donator(@donator, @donation).deliver_now
+      DonationMailer.donation_email_donator(@donator, @donation).deliver_later
       redirect_to thank_you_donator_path(@donator)
 
     else
@@ -69,7 +69,7 @@ class DonationsController < ApplicationController
     @transporters = Transporter.all
     @donation.update(ordered: true)
     @transporters.each do |trans|
-      TransporterMailer.transporter_email(@donation, @donator, trans).deliver_now
+      TransporterMailer.transporter_email(@donation, @donator, trans).deliver_later
     end
 
     redirect_to thank_you_donation_path(@donation)
@@ -83,10 +83,9 @@ class DonationsController < ApplicationController
   def transport
     @donation = Donation.find(params[:id])
     @donator = @donation.donator
-    @shares = @donation.shares
+    @shares = @donation.shares.where(pick_up: false)
     set_transporter_token
     find_transporter
-
     unless transporter_authenticated?
       redirect_to root_path
     end
@@ -95,7 +94,7 @@ class DonationsController < ApplicationController
   def confirm_transport
     @donation = Donation.find(params[:id])
     @donator = @donation.donator
-    @shares = @donation.shares
+    @shares = @donation.shares.where(pick_up: false)
     set_transporter_token
     find_transporter
 

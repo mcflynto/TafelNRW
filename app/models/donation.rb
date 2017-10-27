@@ -11,7 +11,7 @@ class Donation < ApplicationRecord
   def donation_mail(donator)
     @organization = Organization.all
     @organization.each do |t|
-      DonationMailer.donation_email(self, t, donator).deliver_now
+      DonationMailer.donation_email(self, t, donator).deliver_later
     end
   end
 

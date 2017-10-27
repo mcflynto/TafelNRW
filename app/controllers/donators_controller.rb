@@ -1,7 +1,7 @@
 # Donators Controller
 class DonatorsController < ApplicationController
   before_action :no_tafel_user, only:[:new, :login, :verification, :create]
-
+  before_action :require_login, only:[:index]
   def no_tafel_user
     if current_user
       redirect_to donators_path
@@ -49,7 +49,7 @@ class DonatorsController < ApplicationController
 
     if @donator.save
       @donation.donation_mail(@donator)
-      DonationMailer.donation_email_donator(@donator, @donation).deliver_now
+      DonationMailer.donation_email_donator(@donator, @donation).deliver_later
       flash[:success] = 'Spende eingestellt!'
       redirect_to thank_you_donator_path(@donator)
 
