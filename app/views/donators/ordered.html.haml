@@ -3,7 +3,7 @@
   %ul
   - @donator.each do |donator|
     %li #{donator.name}
-    - donator.ordered_donation.each do |donations|
+    - donator.donations.ordered_donation.each do |donations|
       #{donations.food}
       #{donations.amount}
       #{donations.unit}

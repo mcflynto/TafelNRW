@@ -1,4 +1,9 @@
 class Donation < ApplicationRecord
+  scope :ordered_donation, -> { where(ordered: true) }
+  scope :open_donation, -> do
+    open = where(ordered: nil)
+    open.where('expiry_date > ?', Date.today )
+  end
   belongs_to :donator, optional: true
   belongs_to :transporter, optional: true
   has_many :organizations, through: :shares

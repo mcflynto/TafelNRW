@@ -34,6 +34,7 @@ class SharesController < ApplicationController
     end
   end
 
+
   def pickup
     @donation = Donation.find(params[:donation_id])
     @share = @donation.shares.find(params[:id])

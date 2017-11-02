@@ -16,7 +16,7 @@ class TransportersController < ApplicationController
 
   def create
     @transporter = Transporter.new(transporter_params)
-    @transporter.create_transporter_hash
+    @transporter.create_transporter_token
     @address = Address.new(transporter_params[:address_attributes])
     if @transporter.save
       flash[:notice] = 'Transporter wurde hinzugefügt'

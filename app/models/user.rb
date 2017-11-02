@@ -3,7 +3,7 @@ class User < ApplicationRecord
   before_create :setup_activation
   belongs_to :organization
   validates_presence_of :first_name, :email ,:organization, :last_name
-  validates_format_of :email, :with => /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+
 
   validates :email, uniqueness: true
   validates :password, :presence => true, :confirmation => true, :on => :update
