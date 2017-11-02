@@ -8,7 +8,6 @@ class SessionsController < ApplicationController
 
   def create
     @user = login(session_params[:email], session_params[:password])
-
     if @user
       flash[:succes] = 'Login hat funktioniert'
       redirect_to donators_path
