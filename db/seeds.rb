@@ -10,7 +10,7 @@ require 'faker'
 
 2.times do |n|
   name  = "Tafel#{n + 1}"
-  email = "tafel-#{n + 1}@byom.de"
+  email = "tafel-#{n + 1}@tafelapp.de"
   city = Faker::Address.city
   street = Faker::Address.street_name
   plz = Faker::Address.zip
@@ -31,21 +31,21 @@ end
 
 User.create!(first_name: 'Julian',
              last_name: 'Treutler',
-             email: 'julian@byom.de',
+             email: 'julian@tafelapp.de',
              password: 'testtest',
              admin: true,
              organization_id: 1)
 
 User.create!(first_name: 'Philipp',
              last_name: 'Doll',
-             email: 'philipp@byom.de',
+             email: 'philipp@tafelapp.de',
              password: 'testtest',
              admin: true,
              organization_id: 2)
 
 10.times do |n|
   name  = "Spender#{n + 1}"
-  email = "Spender-#{n + 1}@byom.de"
+  email = "Spender-#{n + 1}@tafelapp.de"
   city = Faker::Address.city
   street = Faker::Address.street_name
   plz = Faker::Address.zip
@@ -70,4 +70,25 @@ User.create!(first_name: 'Philipp',
                    unit: 'liter',
                    expiry_date: Time.zone.now + 1.year,
                    donator_id: n + 1)
+end
+
+3.times do |n|
+  name  = "Transporter#{n + 1}"
+  email = "Transporter-#{n + 1}@tafelapp.de"
+  city = Faker::Address.city
+  street = Faker::Address.street_name
+  plz = Faker::Address.zip
+  house_number = Faker::Address.building_number
+  phone = Faker::PhoneNumber.phone_number
+
+  Transporter.create!(name: name,
+                      email: email)
+
+  Address.create!(city: city,
+                  street: street,
+                  plz: plz,
+                  house_number: house_number,
+                  phone: phone,
+                  addressable_id: n + 1,
+                  addressable_type: 'Transporter')
 end
