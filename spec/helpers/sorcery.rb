@@ -8,8 +8,6 @@ module Sorcery
         fill_in 'session_password', with: password
 
         click_button "login"
-
-        # TODO Nachricht
       end
 
       def logout_user
