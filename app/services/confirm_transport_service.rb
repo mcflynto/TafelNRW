@@ -13,6 +13,12 @@ class ConfirmTransportService
     end
   end
 
+  def send_transporter_email
+    Transporter.each do |trans|
+      TransporterMailer.transporter_email(@donation, @donator, trans).deliver_later
+    end
+  end
+
   private
 
   attr_reader :donation, :shares

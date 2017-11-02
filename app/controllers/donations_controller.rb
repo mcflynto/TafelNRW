@@ -66,12 +66,8 @@ class DonationsController < ApplicationController
   def delivery
     @donation = Donation.find(params[:id])
     @donator = @donation.donator
-    @transporters = Transporter.all
     @donation.update(ordered: true)
-    @transporters.each do |trans|
-      TransporterMailer.transporter_email(@donation, @donator, trans).deliver_later
-    end
-
+    ConfirmTransportService.new(@donation, @shares).send_transporter_email
     redirect_to thank_you_donation_path(@donation)
   end
 
@@ -97,21 +93,17 @@ class DonationsController < ApplicationController
     @shares = @donation.shares.where(pick_up: false)
     set_transporter_token
     find_transporter
-
     @donation.update(donation_params)
     @donation.transporter = @transporter
     @donation.save
-
     ConfirmTransportService.new(@donation, @shares).send_transport_confirmation
-
-    @donation.update(confirmed: true)
     redirect_to transport_donation_path(@donation, transporter_hash: @transporter.transporter_hash)
   end
 
   private
 
   def donation_params
-    params.require(:donation).permit(:food, :amount, :unit, :expiry_date , :delivery_date)
+    params.require(:donation).permit(:food, :amount, :unit, :expiry_date , :delivery_date, :confirmed)
   end
 
   def transporter_donation_params

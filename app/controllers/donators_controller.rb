@@ -47,13 +47,11 @@ class DonatorsController < ApplicationController
     @donator = Donator.new(donator_params)
     @donation = @donator.donations.new(donation_params)
     @address = Address.new(donator_params[:address_attributes])
-
     if @donator.save
       @donation.donation_mail(@donator)
       DonationMailer.donation_email_donator(@donator, @donation).deliver_later
       flash[:success] = 'Spende eingestellt!'
       redirect_to thank_you_donator_path(@donator)
-
     else
       flash[:error] = 'Es ist ein Fehler aufgetreteten'
       render :new
