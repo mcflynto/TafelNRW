@@ -2,11 +2,12 @@ FactoryGirl.define do
   factory :user do
     name 'Philipp'
     email 'philippd@byom.de'
-    password 'test'
+    password 'secret'
+    password_confirmation 'secret'
     admin true
-    salt 'asdasdastr4325234324sdfds'
-    crypted_password Sorcery::CryptoProviders::BCrypt.encrypt('secret',
-                     'asdasdastr4325234324sdfds')
+    # salt 'asdasdastr4325234324sdfds'
+    # crypted_password Sorcery::CryptoProviders::BCrypt.encrypt('secret',
+    #                  'asdasdastr4325234324sdfds')
   end
 
   factory :organization do
