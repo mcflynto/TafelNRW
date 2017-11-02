@@ -102,11 +102,7 @@ class DonationsController < ApplicationController
     @donation.transporter = @transporter
     @donation.save
 
-    TransporterMailer.transport_confirmed_mail(@donation).deliver_later
-    DonatorMailer.transport_confirmed_mail(@donation).deliver_later
-    @shares.each do |share|
-      OrganizationMailer.transport_confirmed_mail(@donation, share).deliver_later
-    end
+    ConfirmTransportService.new(@donation, @shares).send_transport_confirmation
 
     @donation.update(confirmed: true)
     redirect_to transport_donation_path(@donation, transporter_hash: @transporter.transporter_hash)
