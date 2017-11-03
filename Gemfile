@@ -56,6 +56,7 @@ group :development, :test do
   gem 'capybara-screenshot'
   gem 'factory_girl_rails'
   gem 'guard-rspec'
+  gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 3.6'
   gem 'selenium-webdriver'
   gem 'simplecov'
