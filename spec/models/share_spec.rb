@@ -17,4 +17,21 @@ RSpec.describe do
     share.pickup?
     expect(share.errors).not_to eq(nil)
   end
+
+  it 'should test the amount validation for a legit share' do
+    share.amount_validation?
+    expect(share.errors.messages).to eq({})
+  end
+
+  it 'should test the amount validation for a zero (non legit) share' do
+    share.amount = 0
+    share.amount_validation?
+    expect(share.errors.messages).not_to eq({})
+  end
+
+  it 'should test the amount validation for a too high share' do
+    share.amount = 15
+    share.amount_validation?
+    expect(share.errors.messages).not_to eq({})
+  end
 end
