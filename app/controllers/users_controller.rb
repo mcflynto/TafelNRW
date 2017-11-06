@@ -62,7 +62,6 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-
     if @user.update(user_params)
       flash[:notice] = 'Nutzer wurde verändert'
       redirect_to users_path

@@ -48,8 +48,7 @@ class DonatorsController < ApplicationController
     @donation = @donator.donations.new(donation_params)
     @address = Address.new(donator_params[:address_attributes])
     if @donator.save
-      @donation.donation_mail(@donator)
-      DonationMailer.donation_email_donator(@donator, @donation).deliver_later
+      DonationEmailService.new(@donation, @donator).send_donation_email
       flash[:success] = 'Spende eingestellt!'
       redirect_to thank_you_donator_path(@donator)
     else

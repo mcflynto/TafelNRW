@@ -18,8 +18,4 @@ class ConfirmTransportService
       TransporterMailer.transporter_email(@donation, @donator, trans).deliver_later
     end
   end
-
-  private
-
-  attr_reader :donation, :shares
 end
