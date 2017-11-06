@@ -6,11 +6,9 @@ class DonationEmailService
   end
 
   def send_donation_email
-    donation.donation_mail(donator)
-    DonatorMailer.donation_email_donator(donator, donation).deliver_later
+    @donation.donation_mail(@donator)
+    DonationMailer.donation_email_donator(@donator, @donation).deliver_later
   end
 
-
-end
 
 end
