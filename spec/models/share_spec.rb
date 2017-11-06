@@ -10,11 +10,33 @@ RSpec.describe do
   let(:transporter) { create(:transporter, address: address3) }
   let(:donation) { create(:donation, donator: donator, transporter: transporter) }
   let(:share) { create(:share, donation: donation, organization: organization) }
-
+  let(:share2) { create(:share, donation: donation, organization: organization) }
   it 'should test the expiry date' do
     share.pick_up_date = Date.today
     donation.expiry_date = Date.today - 2.days
     share.pickup?
     expect(share.errors).not_to eq(nil)
   end
+
+  it 'should test amount higher than total amount ' do
+    share.amount = 12
+    share.amount_validation?
+    expect(share.errors.messages).not_to eq({})
+  end
+
+  it 'should test negative amount ' do
+    share.amount = -1
+    share.amount_validation?
+    expect(share.errors.messages).not_to eq({})
+  end
+
+  it 'should test sum amount higher than total amount' do
+    share.amount_validation?
+    share2.amount = 7
+    share2.amount_validation?
+    expect(share.errors.messages).to eq({})
+    expect(share2.errors.messages).not_to eq({})
+  end
+
+
 end

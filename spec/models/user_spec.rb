@@ -12,4 +12,10 @@ RSpec.describe do
   it 'should test factory setup' do
     expect(donation.amount).to eql(10)
   end
+
+  it 'should not be admin' do
+    user.admin = false;
+    expect(user.is_admin?).to eq(false)
+
+  end
 end

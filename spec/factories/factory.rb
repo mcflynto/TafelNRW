@@ -60,7 +60,7 @@ FactoryBot.define do
   end
 
   factory :share do
-    amount 6
+    amount 5
     pick_up true
     pick_up_date '2017-10-28'
   end

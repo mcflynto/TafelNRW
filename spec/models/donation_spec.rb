@@ -9,9 +9,15 @@ RSpec.describe do
     expect(Donation.open_donation.length).to eq(1)
   end
 
-  it 'should have a valid date' do
+  it 'should not be a valid date' do
     donation.expiry_date = Date.today - 5.days
     donation.valid_date?
     expect(donation.errors.messages).not_to eq({})
+  end
+
+  it 'should be valid date' do
+    donation.expiry_date = Date.today + 5.days
+    donation.valid_date?
+    expect(donation.errors.messages).to eq({})
   end
 end
