@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe do
-  let(:address) { create(:address)}
+  let(:address) { create(:address) }
   let(:organization) { create(:organization, address: address) }
   let(:user) { create(:user, organization: organization) }
   let(:donator) { create(:donator) }

@@ -50,7 +50,7 @@ FactoryBot.define do
     amount 10
     unit 'kg'
     expiry_date '2018-10-30'
-    ordered false
+    ordered nil
     delivery_date '2017-10-25'
     factory :donation_with_share do
       after(:create) do |donation|
