@@ -13,12 +13,9 @@ RSpec.describe do
     expect(donation.amount).to eql(10)
   end
 
-
-
   it 'should test admin status' do
     expect(user.is_admin?).to eq(true)
     user.admin = false
     expect(user.is_admin?).to eq(false)
-
   end
 end
