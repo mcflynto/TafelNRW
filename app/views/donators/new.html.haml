@@ -18,7 +18,7 @@ Waren sie bereits früher schon einmal spender?
       = f.fields_for :donations_attributes, @donation do |d|
         #{d.text_field :food}
         #{d.number_field :amount}
-        #{d.text_field :unit}
+        #{d.select :unit, options_for_select(["kg", "Stück", "Liter"])}
         #{d.date_select :expiry_date}
       %li
         = f.submit "Spende einstellen", class: "btn btn-success"
