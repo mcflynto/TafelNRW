@@ -18,17 +18,14 @@ RSpec.describe do
     expect(share.errors).not_to eq(nil)
   end
 
-  it 'should test amount higher than total amount ' do
-    share.amount = 12
-    share.amount_validation?
-    expect(share.errors.messages).not_to eq({})
-  end
-
   it 'should test negative amount ' do
     share.amount = -1
     share.amount_validation?
     expect(share.errors.messages).not_to eq({})
   end
+
+
+
 
   it 'should test sum amount higher than total amount' do
     share.amount_validation?
@@ -39,4 +36,10 @@ RSpec.describe do
   end
 
 
+
+  it 'should test the amount validation for a too high share' do
+    share.amount = 15
+    share.amount_validation?
+    expect(share.errors.messages).not_to eq({})
+  end
 end
