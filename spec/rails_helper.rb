@@ -8,6 +8,7 @@ require File.expand_path('../../config/environment', __FILE__)
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 require 'capybara/rspec'
+require 'capybara-screenshot/rspec'
 
 Dir[Rails.root.join('spec/helpers/**/*.rb')].each { |f| require f }
 
@@ -34,8 +35,8 @@ ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
   # Use factory girl methods for testing
-  config.include FactoryGirl::Syntax::Methods
-  #Include the sorcery helper
+  config.include FactoryBot::Syntax::Methods
+  # Include the sorcery helper
   config.include Sorcery::TestHelpers::Rails
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false

@@ -6,13 +6,4 @@ class Donator < ApplicationRecord
 
   validates_presence_of :name, :email
   validates :email, uniqueness: true
-
-  def open_donation
-    @open = self.donations.where(ordered: nil).all
-    @open.where('expiry_date > ?', DateTime.now)
-  end
-
-  def ordered_donation
-    self.donations.where(ordered: true).all
-  end
 end

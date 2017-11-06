@@ -1,12 +1,11 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :user do
-    name 'Philipp'
+    first_name 'Philipp'
+    last_name 'Doll'
     email 'philippd@byom.de'
-    password 'test'
+    password 'secret'
+    password_confirmation 'secret'
     admin true
-    salt 'asdasdastr4325234324sdfds'
-    crypted_password Sorcery::CryptoProviders::BCrypt.encrypt('secret',
-                     'asdasdastr4325234324sdfds')
   end
 
   factory :organization do
@@ -50,8 +49,8 @@ FactoryGirl.define do
     food 'Bananen'
     amount 10
     unit 'kg'
-    expiry_date '2017-10-30'
-    ordered false
+    expiry_date '2018-10-30'
+    ordered nil
     delivery_date '2017-10-25'
     factory :donation_with_share do
       after(:create) do |donation|
@@ -61,7 +60,7 @@ FactoryGirl.define do
   end
 
   factory :share do
-    amount 6
+    amount 5
     pick_up true
     pick_up_date '2017-10-28'
   end

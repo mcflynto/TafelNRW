@@ -31,10 +31,8 @@ class DonationsController < ApplicationController
     @donator = Donator.find(params[:donator_id])
     @donation = @donator.donations.new(donation_params)
     if @donation.save
-      @donation.donation_mail(@donator)
-      DonationMailer.donation_email_donator(@donator, @donation).deliver_now
+      DonationEmailService.new(@donation, @donator).send_donation_email
       redirect_to thank_you_donator_path(@donator)
-
     else
       render :new
     end
@@ -66,12 +64,8 @@ class DonationsController < ApplicationController
   def delivery
     @donation = Donation.find(params[:id])
     @donator = @donation.donator
-    @transporters = Transporter.all
     @donation.update(ordered: true)
-    @transporters.each do |trans|
-      TransporterMailer.transporter_email(@donation, @donator, trans).deliver_now
-    end
-
+    ConfirmTransportService.new(@donation, @shares).send_transporter_email
     redirect_to thank_you_donation_path(@donation)
   end
 
@@ -83,10 +77,9 @@ class DonationsController < ApplicationController
   def transport
     @donation = Donation.find(params[:id])
     @donator = @donation.donator
-    @shares = @donation.shares
+    @shares = @donation.shares.where(pick_up: false)
     set_transporter_token
     find_transporter
-
     unless transporter_authenticated?
       redirect_to root_path
     end
@@ -95,28 +88,20 @@ class DonationsController < ApplicationController
   def confirm_transport
     @donation = Donation.find(params[:id])
     @donator = @donation.donator
-    @shares = @donation.shares
+    @shares = @donation.shares.where(pick_up: false)
     set_transporter_token
     find_transporter
-
     @donation.update(donation_params)
     @donation.transporter = @transporter
     @donation.save
-
-    TransporterMailer.transport_confirmed_mail(@donation).deliver_later
-    DonatorMailer.transport_confirmed_mail(@donation).deliver_later
-    @shares.each do |share|
-      OrganizationMailer.transport_confirmed_mail(@donation, share).deliver_later
-    end
-
-    @donation.update(confirmed: true)
+    ConfirmTransportService.new(@donation, @shares).send_transport_confirmation
     redirect_to transport_donation_path(@donation, transporter_hash: @transporter.transporter_hash)
   end
 
   private
 
   def donation_params
-    params.require(:donation).permit(:food, :amount, :unit, :expiry_date , :delivery_date)
+    params.require(:donation).permit(:food, :amount, :unit, :expiry_date , :delivery_date, :confirmed)
   end
 
   def transporter_donation_params

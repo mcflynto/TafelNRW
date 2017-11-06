@@ -31,6 +31,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def organization_members
+    @user = User.where(organization: current_user.organization).all
+  end
+
   def create
     @user = User.new(user_params)
     if @user.save
@@ -58,7 +62,6 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-
     if @user.update(user_params)
       flash[:notice] = 'Nutzer wurde verändert'
       redirect_to users_path
@@ -72,7 +75,7 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(
-      :email, :name, :admin, :organization_id, :password, :password_confirmation
+      :email, :first_name, :last_name, :admin, :organization_id, :password, :password_confirmation
     )
   end
 end

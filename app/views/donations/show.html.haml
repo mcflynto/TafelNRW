@@ -99,5 +99,6 @@
         .modal-body
           %p Sind Sie sicher, dass Sie die Spende selbst abholen möchten?
         .modal-footer
-          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Abbrechen
-          = link_to 'Selbstabholen', edit_donation_share_path(@donation, @share_organization), class: 'btn btn-info'
+          - if @share_organization != nil && @share_organization.pick_up_date == nil
+            %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Abbrechen
+            = link_to 'Selbstabholen', edit_donation_share_path(@donation, @share_organization), class: 'btn btn-info'

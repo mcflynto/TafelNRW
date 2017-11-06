@@ -1,4 +1,9 @@
 class Donation < ApplicationRecord
+  scope :ordered_donation, -> { where(ordered: true) }
+  scope :open_donation, -> do
+    open = where(ordered: nil)
+    open.where('expiry_date > ?', Date.today )
+  end
   belongs_to :donator, optional: true
   belongs_to :transporter, optional: true
   has_many :organizations, through: :shares
@@ -11,7 +16,7 @@ class Donation < ApplicationRecord
   def donation_mail(donator)
     @organization = Organization.all
     @organization.each do |t|
-      DonationMailer.donation_email(self, t, donator).deliver_now
+      DonationMailer.donation_email(self, t, donator).deliver_later
     end
   end
 

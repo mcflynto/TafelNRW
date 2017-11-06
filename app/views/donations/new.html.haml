@@ -2,7 +2,7 @@
 = bootstrap_form_for [@donator, @donation] do |f|
   #{f.text_field :food}
   #{f.number_field :amount}
-  #{f.text_field :unit}
+  #{f.select :unit, options_for_select(["kg", "Stück", "Liter"])}
   #{f.date_select :expiry_date}
   %li
     = f.submit "Spende einstellen", class: "btn btn-success"

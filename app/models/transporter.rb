@@ -6,8 +6,7 @@ class Transporter < ApplicationRecord
 
   validates_presence_of :name, :email
   validates :email, uniqueness: true
-
-  def create_transporter_hash
+  def create_transporter_token
     self.transporter_hash = loop do
       transporter_hash = SecureRandom.urlsafe_base64(nil, false)
       break transporter_hash unless

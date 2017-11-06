@@ -13,6 +13,7 @@ class DonatorMailer < ApplicationMailer
     @donation = donation
     @donator = @donation.donator
     @transporter = @donation.transporter
+    @shares_amount = @donation.shares.sum(:amount)
     @shares = @donation.shares
 
     mail(to: @donator.email, subject: 'Transport bestätigt')

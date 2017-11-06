@@ -3,11 +3,19 @@ Hallo #{@transporter.name},
 Sie haben den Transport folgender Spende am #{@donation.delivery_date} bestätigt:
 %br/
 %br/
-#{@donation.food}
-%br/
-#{@donation.amount}
-%br/
-#{@donation.unit}
+Die Spende beinhaltet:
+%table
+  %thead
+    %tr
+      %th Tafel
+      %th Menge
+      %th Einheit
+  %tbody
+    - @shares.each do |s|
+      %tr
+        %td= s.organization.name
+        %td= s.amount
+        %td= @donation.unit
 %br/
 %br/
 von: #{@donator.name}

@@ -10,7 +10,6 @@ class SharesController < ApplicationController
     @donation = Donation.find(params[:donation_id])
     @share = @donation.shares.new(share_params)
     @share.organization = current_user.organization
-
     if @share.save
       flash[:notice] = "Neue Spende für diese Tafel wurde angelegt"
       redirect_to donation_path(@donation)
@@ -23,8 +22,6 @@ class SharesController < ApplicationController
   def update
     @donation = Donation.find(params[:donation_id])
     @share = @donation.shares.find(params[:id])
-
-    @amount = @share.amount
     if @share.update(share_params)
       flash[:notice] = "Spende konnte geändert werden"
       redirect_to donation_path(@donation)
@@ -34,6 +31,7 @@ class SharesController < ApplicationController
     end
   end
 
+
   def pickup
     @donation = Donation.find(params[:donation_id])
     @share = @donation.shares.find(params[:id])
@@ -41,9 +39,8 @@ class SharesController < ApplicationController
     @donator = @donation.donator
     if @share.update(share_params)
       flash[:notice] = "Selbstabholung spende ist Angefragt"
-      DonatorMailer.pickup_email(@donation, @organization, @donator, @share).deliver_now
+      DonatorMailer.pickup_email(@donation, @organization, @donator, @share).deliver_later
       render :thank_you
-
     else
       render :edit
     end

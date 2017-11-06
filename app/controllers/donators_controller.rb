@@ -1,8 +1,9 @@
 # Donators Controller
 class DonatorsController < ApplicationController
-  before_action :no_tafel_user, only:[:new, :login, :verification, :create]
+  before_action :check_permission, only: [ :new, :login, :verification, :create ]
+  before_action :require_login, only: [ :index]
 
-  def no_tafel_user
+  def check_permission
     if current_user
       redirect_to donators_path
     end
@@ -46,13 +47,10 @@ class DonatorsController < ApplicationController
     @donator = Donator.new(donator_params)
     @donation = @donator.donations.new(donation_params)
     @address = Address.new(donator_params[:address_attributes])
-
     if @donator.save
-      @donation.donation_mail(@donator)
-      DonationMailer.donation_email_donator(@donator, @donation).deliver_now
+      DonationEmailService.new(@donation, @donator).send_donation_email
       flash[:success] = 'Spende eingestellt!'
       redirect_to thank_you_donator_path(@donator)
-
     else
       flash[:error] = 'Es ist ein Fehler aufgetreteten'
       render :new
