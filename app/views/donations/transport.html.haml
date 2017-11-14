@@ -28,7 +28,8 @@
       - if @donation.confirmed?
         .btn.btn-success Transport bestätigt!
       - else
-        %button.btn.btn-info{"data-target" => "#confirmation-modal", "data-toggle" => "modal", :type => "button"} Transport bestätigen
+        -# %button.btn.btn-info{"data-target" => "#confirmation-modal", "data-toggle" => "modal", :type => "button"} Transport bestätigen
+        = f.submit 'Transport bestätigen', class: 'btn btn-info'
       / Modal
       #confirmation-modal.modal.fade{:role => "dialog"}
         .modal-dialog

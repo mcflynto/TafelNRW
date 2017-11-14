@@ -8,8 +8,8 @@ class TransporterMailer < ApplicationMailer
     @donator = donator
     @transporter = transporter
     @url = transport_donation_url(@donation, transporter_hash: @transporter.transporter_hash)
-
     mail(to: @transporter.email, subject: 'Transport angefordert')
+
   end
 
   def transport_confirmed_mail(donation)

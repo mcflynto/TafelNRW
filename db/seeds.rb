@@ -81,8 +81,10 @@ end
   house_number = Faker::Address.building_number
   phone = Faker::PhoneNumber.phone_number
 
-  Transporter.create!(name: name,
+  a = Transporter.create!(name: name,
                       email: email)
+  a.create_transporter_token
+  a.save
 
   Address.create!(city: city,
                   street: street,

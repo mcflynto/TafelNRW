@@ -65,7 +65,7 @@ class DonationsController < ApplicationController
     @donation = Donation.find(params[:id])
     @donator = @donation.donator
     @donation.update(ordered: true)
-    ConfirmTransportService.new(@donation, @shares).send_transporter_email
+    ConfirmTransportService.new(@donation, @shares, @donator).send_transporter_email
     redirect_to thank_you_donation_path(@donation)
   end
 
@@ -94,7 +94,7 @@ class DonationsController < ApplicationController
     @donation.update(donation_params)
     @donation.transporter = @transporter
     @donation.save
-    ConfirmTransportService.new(@donation, @shares).send_transport_confirmation
+    ConfirmTransportService.new(@donation, @shares, @donator).send_transport_confirmation
     redirect_to transport_donation_path(@donation, transporter_hash: @transporter.transporter_hash)
   end
 

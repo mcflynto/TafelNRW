@@ -1,8 +1,9 @@
 # Sends confirmation mails for a donation to every participating party
 class ConfirmTransportService
-  def initialize(donation, shares)
+  def initialize(donation, shares, donator)
     @donation = donation
     @shares = shares
+    @donator = donator
   end
 
   def send_transport_confirmation
@@ -14,8 +15,8 @@ class ConfirmTransportService
   end
 
   def send_transporter_email
-    Transporter.each do |trans|
-      TransporterMailer.transporter_email(@donation, @donator, trans).deliver_later
+    Transporter.all.each do |trans|
+      TransporterMailer.transporter_email(@donation, @donator, trans).deliver_now
     end
   end
 end
