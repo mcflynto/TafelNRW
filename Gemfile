@@ -44,6 +44,9 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Capistrano for deployment
+gem 'capistrano'
+gem 'capistrano-rails'
+gem 'capistrano-bundler'
 # gem 'capistrano-rails', group: :development
 gem 'letter_opener', group: :development
 

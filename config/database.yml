@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: TafelNRW_production
-  username: TafelNRW
-  password: <%= ENV['TAFELNRW_DATABASE_PASSWORD'] %>
+  username: app
+  password:
