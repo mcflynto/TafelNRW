@@ -80,6 +80,6 @@ test:
 #
 production:
   <<: *default
-  database: TafelNRW_production
+  database: tafelnrw_production
   username: app
   password:
